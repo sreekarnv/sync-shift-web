@@ -1,11 +1,16 @@
 import { axios } from '@/config/axios';
+import useAppContext from '@/hooks/use-app-context';
 import { useMutation } from '@tanstack/react-query';
-import React from 'react';
+import { AxiosResponse } from 'axios';
 
 export type SignupUserInput = {
   email: string;
   password: string;
   name: string;
+};
+
+export type SignupUserResponse = {
+  token: string;
 };
 
 export const signupUser = async (data: SignupUserInput) => {
@@ -17,14 +22,17 @@ export const signupUser = async (data: SignupUserInput) => {
 };
 
 const useSignupMutation = () => {
-  const res = useMutation<any, any, SignupUserInput>(
-    (data) => signupUser(data),
-    {
-      onSuccess(data, variables, context) {
-        console.log(data);
-      },
-    }
-  );
+  const { saveJwtToStorage } = useAppContext();
+
+  const res = useMutation<
+    AxiosResponse<SignupUserResponse>,
+    any,
+    SignupUserInput
+  >((data) => signupUser(data), {
+    onSuccess(res) {
+      saveJwtToStorage(res.data.token);
+    },
+  });
 
   return res;
 };

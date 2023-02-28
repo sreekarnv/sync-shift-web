@@ -15,11 +15,14 @@ import AppRouter from './router';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './config/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import AppProvider from './providers/app-provider';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <AppRouter />
+      <AppProvider>
+        <AppRouter />
+      </AppProvider>
       <ReactQueryDevtools />
     </QueryClientProvider>
   </React.StrictMode>

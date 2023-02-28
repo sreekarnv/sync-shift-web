@@ -1,9 +1,8 @@
 import React from 'react';
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import useAppContext from './hooks/use-app-context';
+import IndexPage from './pages/app';
+import AppLayout from './pages/app.layout';
 
 import AuthLayout from './pages/auth.layout';
 import SignInPage from './pages/auth/signin';
@@ -12,7 +11,13 @@ import SignupPage from './pages/auth/signup';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to="/auth/signup" />,
+    element: <AppLayout />,
+    children: [
+      {
+        index: true,
+        element: <IndexPage />,
+      },
+    ],
   },
   {
     path: '/auth',
@@ -31,11 +36,17 @@ const router = createBrowserRouter([
 ]);
 
 const AppRouter: React.FC = () => {
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+  const { loadJwtFromStorage, isLoading } = useAppContext();
+
+  React.useEffect(() => {
+    loadJwtFromStorage();
+  }, []);
+
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
+
+  return <RouterProvider router={router} />;
 };
 
 export default AppRouter;
