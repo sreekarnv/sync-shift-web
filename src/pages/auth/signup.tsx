@@ -1,12 +1,13 @@
 import React from 'react';
 
-import FormInput from '@/components/form-input';
+import FormInput from '@/components/forms/form-input';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import useSignupMutation, {
   SignupUserInput,
 } from '@/hooks/api/mutations/auth/use-signup-mutation';
-import FormError from '@/components/form-error';
+import FormError from '@/components/forms/form-error';
+import Button from '@/components/ui/button';
 
 const SignupPage: React.FC = () => {
   const { register, handleSubmit } = useForm<SignupUserInput>({
@@ -54,9 +55,14 @@ const SignupPage: React.FC = () => {
 
         <div className="col-12">
           <div className="mb-4">
-            <button type="submit" className="btn btn-secondary w-100">
-              {isLoading ? 'LOADING...' : 'SIGN UP'}
-            </button>
+            <Button
+              isLoading={isLoading}
+              color="secondary"
+              type="submit"
+              className="w-100"
+            >
+              SIGN UP
+            </Button>
           </div>
         </div>
 
@@ -64,7 +70,7 @@ const SignupPage: React.FC = () => {
           <div className="text-center">
             <p className="mb-0">
               Already have an account ?{' '}
-              <Link to="/auth/signin" className="text-warning">
+              <Link to="/auth/signin" className="text-primary">
                 Sign in
               </Link>
             </p>

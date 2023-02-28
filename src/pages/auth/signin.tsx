@@ -1,32 +1,60 @@
+import Button from '@/components/ui/button';
+import FormError from '@/components/forms/form-error';
+import FormInput from '@/components/forms/form-input';
+import useSigninMutation, {
+  SigninUserInput,
+} from '@/hooks/api/mutations/auth/use-signin-mutation';
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
-interface SignInPageProps extends React.PropsWithChildren {}
+const SignInPage: React.FC = () => {
+  const { error, isLoading, mutate } = useSigninMutation();
 
-const SignInPage: React.FC<SignInPageProps> = ({}) => {
+  const { register, handleSubmit } = useForm<SigninUserInput>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
   return (
     <>
-      <div className="row">
+      <form
+        className="row"
+        autoComplete="off"
+        onSubmit={handleSubmit((data) => mutate(data))}
+        noValidate
+      >
         <div className="col-md-12 mb-3">
           <h2>Sign In</h2>
           <p>Enter your email and password to login</p>
         </div>
+
+        <FormError error={error} />
+
         <div className="col-md-12">
-          <div className="mb-3">
-            <label className="form-label">Email</label>
-            <input type="email" className="form-control" />
-          </div>
+          <FormInput type="email" label="Email" {...register('email')} />
         </div>
+
         <div className="col-12">
-          <div className="mb-4">
-            <label className="form-label">Password</label>
-            <input type="text" className="form-control" />
-          </div>
+          <FormInput
+            type="password"
+            label="Password"
+            {...register('password')}
+          />
         </div>
 
         <div className="col-12">
           <div className="mb-4">
-            <button className="btn btn-secondary w-100">SIGN IN</button>
+            <Button
+              isLoading={isLoading}
+              type="submit"
+              color="secondary"
+              className="w-100"
+            >
+              SIGN IN
+            </Button>
           </div>
         </div>
 
@@ -34,13 +62,13 @@ const SignInPage: React.FC<SignInPageProps> = ({}) => {
           <div className="text-center">
             <p className="mb-0">
               Dont't have an account ?{' '}
-              <Link to="/auth/signup" className="text-warning">
+              <Link to="/auth/signup" className="text-primary">
                 Sign Up
               </Link>
             </p>
           </div>
         </div>
-      </div>
+      </form>
     </>
   );
 };

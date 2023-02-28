@@ -1,4 +1,4 @@
-body.dark div#load_screen {
+.loader-root {
   background: rgb(236, 239, 255);
   opacity: 1;
   position: fixed;
@@ -9,19 +9,23 @@ body.dark div#load_screen {
   right: 0;
   width: 100%;
 }
-body.dark div#load_screen .loader {
+
+.loader-root .loader {
   display: flex;
   justify-content: center;
   height: 100vh;
 }
-body.dark div#load_screen .loader-content {
+
+.loader-root .loader-content {
   right: 0;
   align-self: center;
 }
-body.dark div#load_screen .loader-content .spinner-grow {
+
+.loader-root .loader-content .spinner-grow {
   width: 2.5rem;
   height: 2.5rem;
 }
-body.dark .spinner-grow {
+
+.spinner-grow {
   color: #304aca;
 }

@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import '@/assets/css/light/main.css';
-import '@/assets/css/dark/main.css';
+import '@/assets/css/base/main.css';
 
 import '@fontsource/nunito/latin-400.css';
 import '@fontsource/nunito/latin-600.css';

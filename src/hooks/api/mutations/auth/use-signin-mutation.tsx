@@ -31,6 +31,9 @@ const useSigninMutation = () => {
     onSuccess(res) {
       saveJwtToStorage(res.data.token);
     },
+    onError(err) {
+      console.log(err);
+    },
   });
 
   return res;

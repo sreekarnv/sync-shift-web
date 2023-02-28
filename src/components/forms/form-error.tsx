@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import React from 'react';
+import Alert from '../ui/alert';
 
 interface FormErrorProps {
   error: AxiosError<any>;
@@ -9,18 +10,18 @@ const FormError: React.FC<FormErrorProps> = ({ error }) => {
   return (
     <>
       {error?.response?.data?.errors && (
-        <div className="alert alert-danger mb-4">
-          <ul>
+        <Alert className="mb-4">
+          <ul className="mb-0">
             {error?.response?.data?.errors?.map((el: any, i: number) => {
               return (
-                <li key={i}>
+                <li key={i} className="mb-1">
                   {(typeof el === 'string' && el) ||
                     (el?.message && el.message)}
                 </li>
               );
             })}
           </ul>
-        </div>
+        </Alert>
       )}
     </>
   );

@@ -1,10 +1,12 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Loader from './components/ui/loader';
 import useAppContext from './hooks/use-app-context';
 import IndexPage from './pages/app';
 import AppLayout from './pages/app.layout';
 
 import AuthLayout from './pages/auth.layout';
+
 import SignInPage from './pages/auth/signin';
 import SignupPage from './pages/auth/signup';
 
@@ -43,7 +45,7 @@ const AppRouter: React.FC = () => {
   }, []);
 
   if (isLoading) {
-    return <div>loading...</div>;
+    return <Loader />;
   }
 
   return <RouterProvider router={router} />;
