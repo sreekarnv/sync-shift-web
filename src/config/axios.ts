@@ -1,10 +1,11 @@
 import Axios from 'axios';
 
 export const axios = Axios.create({
-  baseURL: process.env.VITE_APP_SERVER_URL || 'http://localhost:8080',
-  withCredentials: true,
+  baseURL: import.meta.env.VITE_APP_SERVER_URL || 'http://localhost:8080',
   headers: {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
+    Authorization: localStorage.getItem('token')
+      ? `Bearer ${localStorage.getItem('token')}`
+      : undefined,
   },
 });
