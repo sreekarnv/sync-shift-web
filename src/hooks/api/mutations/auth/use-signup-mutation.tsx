@@ -15,7 +15,7 @@ export type SignupUserResponse = {
 
 export const signupUser = async (data: SignupUserInput) => {
   return axios({
-    url: '/api/v1/users/signup',
+    url: '/api/v1/auth/signup',
     method: 'POST',
     data,
   });

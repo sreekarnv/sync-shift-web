@@ -4,11 +4,10 @@ import Loader from './components/ui/loader';
 import useAppContext from './hooks/use-app-context';
 import IndexPage from './pages/app';
 import AppLayout from './pages/app.layout';
-
-import AuthLayout from './pages/auth.layout';
-
 import SignInPage from './pages/auth/signin';
 import SignupPage from './pages/auth/signup';
+
+const AuthLayout = React.lazy(() => import('./pages/auth.layout'));
 
 const router = createBrowserRouter([
   {
@@ -23,7 +22,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/auth',
-    element: <AuthLayout />,
+    element: (
+      <React.Suspense fallback={<Loader />}>
+        <AuthLayout />
+      </React.Suspense>
+    ),
     children: [
       {
         path: 'signin',

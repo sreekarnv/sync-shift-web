@@ -14,7 +14,7 @@ export type SigninUserResponse = {
 
 export const signinUser = async (data: SigninUserInput) => {
   return axios({
-    url: '/api/v1/users/signin',
+    url: '/api/v1/auth/signin',
     method: 'POST',
     data,
   });
