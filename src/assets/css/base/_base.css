@@ -4254,3 +4254,7 @@ fieldset:disabled .btn {
 .position-relative {
   position: relative;
 }
+
+.text-inherit {
+  color: inherit !important;
+}

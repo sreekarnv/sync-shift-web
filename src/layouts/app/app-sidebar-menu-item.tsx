@@ -1,5 +1,6 @@
+import clsx from 'clsx';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 interface AppSidebarMenuItemProps
   extends React.DetailedHTMLProps<
@@ -15,12 +16,26 @@ const AppSidebarMenuItem: React.FC<AppSidebarMenuItemProps> = ({
   icon,
   to,
   text,
+  className,
   ...props
 }) => {
+  const location = useLocation();
+
   return (
     <>
-      <li className="menu" {...props}>
-        <Link to={to} aria-expanded="false" className="dropdown-toggle">
+      <li
+        className={clsx([
+          'menu',
+          location.pathname === to && 'active',
+          className,
+        ])}
+        {...props}
+      >
+        <Link
+          to={to}
+          aria-expanded="false"
+          className="dropdown-toggle text-inherit"
+        >
           <div>
             {icon}
             <span>{text}</span>

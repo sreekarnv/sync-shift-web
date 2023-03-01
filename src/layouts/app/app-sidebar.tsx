@@ -70,8 +70,9 @@ const AppSidebar: React.FC<AppSidebarProps> = ({}) => {
             />
 
             <AppSidebarMenuItem
+              className="text-danger"
               onClick={() => clearJwtFromStorage()}
-              to="/"
+              to="#"
               icon={<FeatherLogoutIcon />}
               text="Log Out"
             />

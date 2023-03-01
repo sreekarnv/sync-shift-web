@@ -22,7 +22,6 @@ const SignInPage: React.FC = () => {
     <>
       <form
         className="row"
-        autoComplete="off"
         onSubmit={handleSubmit((data) => mutate(data))}
         noValidate
       >

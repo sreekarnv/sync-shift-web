@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 interface AppNavbarDropdownLinkProps {
   icon: React.ReactNode;
@@ -14,9 +14,9 @@ const AppNavbarDropdownLink: React.FC<AppNavbarDropdownLinkProps> = ({
 }) => {
   return (
     <>
-      <Link to={to}>
+      <NavLink to={to}>
         {icon} <span>{text}</span>
-      </Link>
+      </NavLink>
     </>
   );
 };

@@ -19,7 +19,7 @@ const FeatherLogoutIcon: React.FC<FeatherLogoutIconProps> = ({
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className={clsx(['feather feather-log-out', className])}
+        className={clsx(['feather feather-log-out text-inherit', className])}
         {...props}
       >
         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>

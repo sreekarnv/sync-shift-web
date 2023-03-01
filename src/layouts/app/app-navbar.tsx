@@ -1,6 +1,7 @@
 import FeatherLogoutIcon from '@/components/icons/feather-logout-icon';
 import FeatherUserIcon from '@/components/icons/feather-user-icon';
 import useAppContext from '@/hooks/use-app-context';
+import useAppPage from '@/hooks/use-page';
 import Avatar from 'boring-avatars';
 import React from 'react';
 import AppNavbarDropdownLink from './app-navbar-dropdown-link';
@@ -9,6 +10,7 @@ interface AppNavbarProps extends React.PropsWithChildren {}
 
 const AppNavbar: React.FC<AppNavbarProps> = ({}) => {
   const { user, clearJwtFromStorage } = useAppContext();
+  const { current } = useAppPage();
 
   if (!user) {
     return <></>;
@@ -18,6 +20,7 @@ const AppNavbar: React.FC<AppNavbarProps> = ({}) => {
     <>
       <div className="header-container container-xxl">
         <header className="header navbar navbar-expand-sm expand-header">
+          <h4 className="mb-0 fw-semibold">{current?.heading}</h4>
           <ul className="navbar-item flex-row ms-lg-auto ms-0">
             <li className="nav-item dropdown user-profile-dropdown order-lg-0 order-1">
               <a
