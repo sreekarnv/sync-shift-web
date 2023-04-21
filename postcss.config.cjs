@@ -1,7 +1,9 @@
 const purgecss = require('@fullhuman/postcss-purgecss');
 
-module.exports = {
-  plugins: [
+const plugins = [];
+
+if (process.env.NODE_ENV === 'production') {
+  plugins.push(
     purgecss({
       content: [
         './index.html',
@@ -10,6 +12,10 @@ module.exports = {
         './src/**/*.js',
         './src/**/*.jsx',
       ],
-    }),
-  ],
+    })
+  );
+}
+
+module.exports = {
+  plugins: [],
 };
