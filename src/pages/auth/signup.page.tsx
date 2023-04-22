@@ -8,6 +8,7 @@ import useSignupMutation, {
 } from '@/hooks/api/mutations/auth/use-signup-mutation';
 import FormError from '@/components/forms/form-error';
 import Button from '@/components/ui/button';
+import { FormRadio, FormRadioGroup } from '@/components/forms/form-radio';
 
 const SignupPage: React.FC = () => {
   const { register, handleSubmit } = useForm<SignupUserInput>({
@@ -15,6 +16,7 @@ const SignupPage: React.FC = () => {
       name: '',
       email: '',
       password: '',
+      role: 'STUDENT',
     },
   });
 
@@ -25,7 +27,10 @@ const SignupPage: React.FC = () => {
       <form
         className="row"
         autoComplete="off"
-        onSubmit={handleSubmit((data) => mutate(data))}
+        onSubmit={handleSubmit((data) => {
+          console.log(data);
+          mutate(data);
+        })}
         noValidate
       >
         <div className="col-md-12 mb-3">
@@ -51,6 +56,26 @@ const SignupPage: React.FC = () => {
             label="Password"
             {...register('password')}
           />
+        </div>
+        <div className="col-12 mb-1">
+          <FormRadioGroup name="role">
+            {[
+              {
+                label: 'Student',
+                id: 'student',
+                value: 'STUDENT',
+              },
+              {
+                label: 'Staff',
+                id: 'staff',
+                value: 'STAFF',
+              },
+            ].map((item) => {
+              return (
+                <FormRadio {...register('role')} {...item} key={item.id} />
+              );
+            })}
+          </FormRadioGroup>
         </div>
 
         <div className="col-12">

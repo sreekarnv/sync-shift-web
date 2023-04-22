@@ -7,13 +7,21 @@ export type SignupUserInput = {
   email: string;
   password: string;
   name: string;
+  role: 'STUDENT' | 'STAFF';
 };
 
 export type SignupUserResponse = {
   token: string;
 };
 
-export const signupUser = async (data: SignupUserInput) => {
+export const signupUser = async (input: SignupUserInput) => {
+  const data = {
+    name: input.name,
+    email: input.email,
+    password: input.password,
+    isStaff: input.role === 'STAFF',
+  };
+
   return axios({
     url: '/api/v1/auth/signup',
     method: 'POST',

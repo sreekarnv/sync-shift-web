@@ -10,3 +10,5 @@ their BITS email ID. The application will have a sign-in page, from where member
 Registered members can log in via login page with BITS email and password set during
 registration. After logging into the application members can look for the availability of other
 community members and facilities. Members can also set their availability.
+
+- userId, profId, time

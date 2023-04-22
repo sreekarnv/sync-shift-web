@@ -5,8 +5,8 @@ import useAppContext from '@/hooks/use-app-context';
 import IndexPage from '@/pages/app/index.page';
 import SignInPage from '@/pages/auth/signin.page';
 import SignupPage from '@/pages/auth/signup.page';
-import MembersPage from './pages/app/members.page';
-import ProfilePage from './pages/app/profile.page';
+import MembersPage from '@/pages/app/members.page';
+import ProfilePage from '@/pages/app/profile.page';
 
 const AuthLayout = React.lazy(() => import('./layouts/auth.layout'));
 const AppLayout = React.lazy(() => import('./layouts/app.layout'));
