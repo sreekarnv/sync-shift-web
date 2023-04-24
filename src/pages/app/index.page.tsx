@@ -231,7 +231,6 @@ const IndexPage = () => {
   return (
     <div className="IndexPage">
       <h1>Dashboard</h1>
-      <h2>Chart JS</h2>
       <div style={{ overflowX: "scroll", maxWidth: "100vw" }}>
         <div
           style={{
