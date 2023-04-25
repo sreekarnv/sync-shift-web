@@ -1,46 +1,72 @@
-import { Calendar, View,Views, momentLocalizer } from 'react-big-calendar';
-import moment from 'moment';
-import { SetStateAction, useCallback, useState } from 'react';
+import React from "react";
+import {DateTime} from "luxon"
 
-const localizer = momentLocalizer(moment);
+import { Calendar, Event, luxonLocalizer } from "react-big-calendar";
 
-// type CourseBookProps = {
-// loginStatus?: string;
-// };
-interface IndexPageProps extends React.PropsWithChildren {}
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "./styles.scss";
+import { Box } from "@mui/material";
 
-const IndexPage: React.FC<IndexPageProps> = ({}) => {
-  const [date, setDate] = useState(new Date(2015, 3, 1));
-  const [view, setView] = useState(Views.WEEK as View);
+// const ctx = document.getElementById("canvas").getContext("2d");
+// const fillPattern = ctx.createLinearGradient(0, 0, 200, 0);
 
-  const onNavigate = useCallback((newDate: SetStateAction<Date>) => setDate(newDate), [setDate])
+
+const localizer = luxonLocalizer(DateTime);
+const myEventsList: Event[] = [
+  {
+    title: "All Day Event very long title",
+    start: new Date("2022-04-08T10:00"),
+    end: new Date("2022-04-09T17:00"),
+    resource: "test"
+  },
+  {
+    title: "Long Event",
+    start: new Date("2022-04-08T23:00"),
+    end: new Date("2022-04-08T23:39")
+  },
+  {
+    title: "Long Event 2",
+    start: new Date("2022-04-08T23:00"),
+    end: new Date("2022-04-10T23:39")
+  },
+  {
+    title: "Long Event 3",
+    start: new Date("2022-04-08T23:00"),
+    end: new Date("2022-04-08T23:39")
+  },
+  {
+    title: "Long Event 4",
+    start: new Date("2022-04-08T23:00"),
+    end: new Date("2022-04-08T23:39")
+  },
+  {
+    title: "Long Event 5",
+    start: new Date("2022-04-08T23:00"),
+    end: new Date("2022-04-08T23:39")
+  }
+];
+
+const MyCalendar = () => (
+  <Calendar
+    localizer={localizer}
+    events={myEventsList}
+    startAccessor="start"
+    endAccessor="end"
+    // defaultView="day"
+    style={{ height: "80vh" }}
+    popup
+    // views={["month", "week", "day"]}
+  />
+);
+
+
+const IndexPage = () => {
+
   return (
-    <>
-      <div className="container">
-        <h1>Your Schedule</h1>
-        <div>
-        <div>
-    <Calendar
-      localizer={localizer}
-      startAccessor="start"
-      endAccessor="end"
-      style={{ height: 500 }}
-    />
-  </div>
-        {/* <Calendar
-          date={date}
-          events={[]}
-          localizer={localizer}
-          onNavigate={onNavigate}
-          onView={setView}
-          view={view}
-        /> */}
-    </div>
-      </div>
-    </>
+    <Box className="IndexPage" >
+      <MyCalendar />
+    </Box>
   );
 };
 
 export default IndexPage;
-
-
