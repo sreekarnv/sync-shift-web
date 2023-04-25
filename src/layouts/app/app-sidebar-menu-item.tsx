@@ -10,6 +10,7 @@ interface AppSidebarMenuItemProps
   icon: React.ReactNode;
   to: string;
   text: string;
+  exact?: boolean;
 }
 
 const AppSidebarMenuItem: React.FC<AppSidebarMenuItemProps> = ({
@@ -17,6 +18,7 @@ const AppSidebarMenuItem: React.FC<AppSidebarMenuItemProps> = ({
   to,
   text,
   className,
+  exact = true,
   ...props
 }) => {
   const location = useLocation();
@@ -26,7 +28,9 @@ const AppSidebarMenuItem: React.FC<AppSidebarMenuItemProps> = ({
       <li
         className={clsx([
           'menu',
-          location.pathname === to && 'active',
+          exact
+            ? location.pathname === to && 'active'
+            : location.pathname.startsWith(to) && 'active',
           className,
         ])}
         {...props}

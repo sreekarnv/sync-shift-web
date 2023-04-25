@@ -65,6 +65,7 @@ const AppSidebar: React.FC<AppSidebarProps> = ({}) => {
 
             <AppSidebarMenuItem
               to="/profile"
+              exact={false}
               icon={<FeatherUserIcon />}
               text="Profile"
             />
