@@ -90,6 +90,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({}) => {
               variant="beam"
               colors={['#92A1C6', '#146A7C', '#C271B4', '#C20D90']}
             />
+          <Typography>{user.name}</Typography>
           <Typography>{user.email}</Typography>
           <Typography>{user.role}</Typography>
         </Box>
@@ -185,6 +186,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({}) => {
             />
             <Box width={10}/>
             <Box display='flex' flexDirection='column'>
+              <Typography>{user.name}</Typography>
               <Typography>{user.email}</Typography>
               <Typography>{user.role}</Typography>
             </Box>
