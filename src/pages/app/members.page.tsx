@@ -173,6 +173,7 @@ const MembersPage: React.FC<MembersPageProps> = ({}) => {
             />
             <Box width={10}/>
             <Box display='flex' flexDirection='column'>
+              <Typography>{user.name}</Typography>
               <Typography>{user.email}</Typography>
               <Typography>{user.role}</Typography>
             </Box>
