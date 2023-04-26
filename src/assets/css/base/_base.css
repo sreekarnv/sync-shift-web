@@ -4258,3 +4258,7 @@ fieldset:disabled .btn {
 .text-inherit {
   color: inherit !important;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
