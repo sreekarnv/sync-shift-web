@@ -28,7 +28,6 @@ const SignupPage: React.FC = () => {
         className="row"
         autoComplete="off"
         onSubmit={handleSubmit((data) => {
-          console.log(data);
           mutate(data);
         })}
         noValidate

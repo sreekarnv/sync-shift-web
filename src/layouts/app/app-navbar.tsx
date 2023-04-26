@@ -5,6 +5,7 @@ import useAppPage from '@/hooks/use-page';
 import Avatar from 'boring-avatars';
 import React from 'react';
 import AppNavbarDropdownLink from './app-navbar-dropdown-link';
+import FeatherEditIcon from '@/components/icons/feather-edit.icon';
 
 interface AppNavbarProps extends React.PropsWithChildren {}
 
@@ -61,6 +62,14 @@ const AppNavbar: React.FC<AppNavbarProps> = ({}) => {
                     text="Profile"
                   />
                 </div>
+                <div className="dropdown-item">
+                  <AppNavbarDropdownLink
+                    to="/profile/edit"
+                    icon={<FeatherEditIcon />}
+                    text="Edit Profile"
+                  />
+                </div>
+                <hr className="divider" />
                 <div
                   className="dropdown-item"
                   onClick={() => clearJwtFromStorage()}

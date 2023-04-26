@@ -12,6 +12,16 @@ const variants = {
     light: 'btn-light',
     dark: 'btn-dark',
   },
+  outline: {
+    primary: 'btn-outline-primary',
+    secondary: 'btn-outline-secondary',
+    success: 'btn-outline-success',
+    danger: 'btn-outline-danger',
+    warning: 'btn-outline-warning',
+    info: 'btn-outline-info',
+    light: 'btn-outline-light',
+    dark: 'btn-outline-dark',
+  },
 };
 
 interface ButtonProps

@@ -1,0 +1,87 @@
+.user-profile {
+  padding-bottom: 25px;
+}
+
+.user-content-area {
+  border: 1px solid #e0e6ed;
+  box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
+}
+
+.user-profile .user-content-area {
+  border-radius: 6px;
+}
+.user-profile .user-content-area .edit-profile {
+  height: 35px;
+  width: 35px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  background-color: #4361ee;
+  background: linear-gradient(to right, #3cba92 0%, #0ba360 100%);
+  border-radius: 50%;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12),
+    0 3px 5px -1px rgba(0, 0, 0, 0.2);
+}
+.user-profile .user-content-area .edit-profile svg {
+  font-size: 17px;
+  vertical-align: middle;
+  margin-right: 0;
+  color: #e0e6ed;
+  width: 19px;
+  align-self: center;
+}
+.user-profile .user-content-area h3 {
+  font-size: 21px;
+  color: #0e1726;
+  margin: 6px 0px 0 0;
+}
+.user-profile .user-content-area .user-info {
+  margin-top: 40px;
+}
+.user-profile .user-content-area .user-info img {
+  border-radius: 9px;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12),
+    0 3px 5px -1px rgba(0, 0, 0, 0.2);
+}
+.user-profile .user-content-area .user-info p {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 22px;
+  color: #009688;
+}
+.user-profile .user-content-area .user-info-list > div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.user-profile .user-content-area .user-info-list ul.contacts-block {
+  border: none;
+  max-width: 217px;
+  margin: 30px 0 0 0;
+}
+.user-profile .user-content-area .user-info-list ul.contacts-block li {
+  margin-bottom: 13px;
+  font-weight: 600;
+  font-size: 13px;
+}
+.user-profile
+  .user-content-area
+  .user-info-list
+  ul.contacts-block
+  li
+  a:not(.btn) {
+  font-weight: 600;
+  font-size: 15px;
+  color: #009688;
+}
+.user-profile
+  .user-content-area
+  .user-info-list
+  ul.contacts-block
+  a:not(.btn)
+  svg {
+  width: 21px;
+  color: #888ea8;
+  vertical-align: middle;
+}
