@@ -1,51 +1,106 @@
-import {
-  Box,
-  Divider,
-  FormControl,
-  InputLabel,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  ListItemText,
-  Modal,
-  Typography,
-} from '@mui/material';
 import React from 'react';
-import Avatar from 'boring-avatars';
+// import Avatar from 'boring-avatars';
 import useAppContext from '@/hooks/use-app-context';
 import useAppPage from '@/hooks/use-page';
-import { useForm, Resolver } from 'react-hook-form';
-import { TextField } from '@mui/material';
-import Button from '@/components/ui/button';
-import { FormOption, FormSelect } from '@/components/forms/form-select';
-import FormInput from '@/components/forms/form-input';
 import UserProfileCard from '@/components/user-profile-card';
+import { createColumnHelper } from '@tanstack/react-table';
 import DataTable from '@/components/tables/data-table';
+import { DataTableItem } from '@/components/tables/data-table-item';
 
-const options = [
-  { label: 'Grapes 🍇', value: 'grapes' },
-  { label: 'Mango 🥭', value: 'mango' },
-  { label: 'Strawberry 🍓', value: 'strawberry', disabled: true },
+type User = {
+  id: number;
+  image: string;
+  name: string;
+  email: string;
+  role: string;
+};
+
+const defaultData: User[] = [
+  {
+    name: 'tanner',
+    id: 24,
+    role: 'STUDENT',
+    email: 'tanner@email.com',
+    image: '/images/profile.jpeg',
+  },
+  {
+    name: 'tandy',
+    id: 40,
+    role: 'STUDENT',
+    email: 'tandy@email.com',
+    image: '/images/profile.jpeg',
+  },
+  {
+    name: 'joe',
+    id: 45,
+    role: 'STUDENT',
+    email: 'joe@email.com',
+    image: '/images/profile.jpeg',
+  },
+];
+
+const columnHelper = createColumnHelper<User>();
+
+const columns = [
+  columnHelper.accessor(
+    (row) => {
+      return {
+        name: row.name,
+        image: row.image,
+      };
+    },
+    {
+      cell: (props) => (
+        <DataTableItem.Profile
+          name={props.getValue().name}
+          image={props.getValue().image}
+        />
+      ),
+      id: 'user',
+      header: () => <span>User</span>,
+    }
+  ),
+
+  columnHelper.accessor('email', {
+    header: () => <span>Email Address</span>,
+    cell: (props) => props.getValue(),
+  }),
+
+  columnHelper.accessor('role', {
+    header: () => <span>Role</span>,
+    cell: (props) => {
+      return (
+        <span className="shadow-none badge badge-secondary">
+          {props.getValue()}
+        </span>
+      );
+    },
+  }),
+
+  columnHelper.display({
+    id: 'action',
+    header: () => <span>Actions</span>,
+    cell: () => <DataTableItem.Action userId="userId" />,
+  }),
 ];
 
 type FormValues = {
   SearchValue: string;
 };
 
-const resolver: Resolver<FormValues> = async (values) => {
-  return {
-    values: values.SearchValue ? values : {},
-    errors: !values.SearchValue
-      ? {
-          SearchValue: {
-            type: 'required',
-            message: 'This is required.',
-          },
-        }
-      : {},
-  };
-};
+// const resolver: Resolver<FormValues> = async (values) => {
+//   return {
+//     values: values.SearchValue ? values : {},
+//     errors: !values.SearchValue
+//       ? {
+//           SearchValue: {
+//             type: 'required',
+//             message: 'This is required.',
+//           },
+//         }
+//       : {},
+//   };
+// };
 
 const ProfilePage: React.FC = () => {
   const { user } = useAppContext();
@@ -55,7 +110,7 @@ const ProfilePage: React.FC = () => {
   return (
     <div className="row">
       <div className="col-md-9">
-        <DataTable />
+        <DataTable columns={columns} data={defaultData} />
         {/* <div className="row">
           <div className="col-md-7">
             <FormInput
