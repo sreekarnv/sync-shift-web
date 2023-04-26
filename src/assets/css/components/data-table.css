@@ -414,3 +414,7 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
   width: 40px;
   height: 40px;
 }
+
+.data-table-role-select-width {
+  width: 30%;
+}

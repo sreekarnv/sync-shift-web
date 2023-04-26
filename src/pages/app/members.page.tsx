@@ -1,3 +1,4 @@
+import { FormSelect } from '@/components/forms/form-select';
 import DataTable from '@/components/tables/data-table';
 import { DataTableItem } from '@/components/tables/data-table-item';
 import { createColumnHelper } from '@tanstack/react-table';
