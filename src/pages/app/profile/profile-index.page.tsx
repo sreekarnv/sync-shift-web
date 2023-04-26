@@ -26,7 +26,7 @@ const defaultData: User[] = [
   {
     name: 'tandy',
     id: 40,
-    role: 'STUDENT',
+    role: 'STAFF',
     email: 'tandy@email.com',
     image: '/images/profile.jpeg',
   },
@@ -56,25 +56,23 @@ const columns = [
           image={props.getValue().image}
         />
       ),
-      id: 'user',
+      id: 'name',
       header: () => <span>User</span>,
+      enableSorting: true,
     }
   ),
 
   columnHelper.accessor('email', {
+    id: 'email',
     header: () => <span>Email Address</span>,
     cell: (props) => props.getValue(),
+    enableSorting: true,
   }),
 
   columnHelper.accessor('role', {
+    id: 'role',
     header: () => <span>Role</span>,
-    cell: (props) => {
-      return (
-        <span className="shadow-none badge badge-secondary">
-          {props.getValue()}
-        </span>
-      );
-    },
+    cell: (props) => <DataTableItem.RoleBadge role={props.getValue()} />,
   }),
 
   columnHelper.display({

@@ -24,7 +24,7 @@ const defaultData: User[] = [
   {
     name: 'tandy',
     id: 40,
-    role: 'STUDENT',
+    role: 'STAFF',
     email: 'tandy@email.com',
     image: '/images/profile.jpeg',
   },
@@ -70,14 +70,7 @@ const columns = [
   columnHelper.accessor('role', {
     id: 'role',
     header: () => <span>Role</span>,
-
-    cell: (props) => {
-      return (
-        <span className="shadow-none badge badge-secondary">
-          {props.getValue()}
-        </span>
-      );
-    },
+    cell: (props) => <DataTableItem.RoleBadge role={props.getValue()} />,
   }),
 
   columnHelper.display({

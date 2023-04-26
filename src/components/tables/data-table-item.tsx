@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../ui/button';
+import clsx from 'clsx';
 
 export const Profile: React.FC<{ image: string; name: string }> = ({
   name,
@@ -28,7 +29,23 @@ export const Action: React.FC<{ userId: string }> = ({ userId }) => {
   );
 };
 
+export const RoleBadge: React.FC<{ role: string }> = ({ role }) => {
+  return (
+    <>
+      <span
+        className={clsx([
+          'shadow-none badge',
+          role === 'STUDENT' ? 'badge-secondary' : 'badge-dark',
+        ])}
+      >
+        {role}
+      </span>
+    </>
+  );
+};
+
 export const DataTableItem = {
   Profile,
   Action,
+  RoleBadge,
 };
