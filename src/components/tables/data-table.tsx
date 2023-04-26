@@ -98,7 +98,12 @@ const DataTable: React.FC<DataTableProps> = ({
               </div>
               <div className="col-6 d-flex justify-content-end mt-sm-0 mt-3">
                 <div className="dataTables_filter">
-                  <FormInput label="" placeholder="Search.." />
+                  <FormInput
+                    label=""
+                    placeholder="Search.."
+                    onChange={(e) => setGlobalFilter(e.target.value)}
+                    value={globalFilter}
+                  />
                 </div>
               </div>
             </div>
