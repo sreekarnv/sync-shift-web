@@ -10,14 +10,17 @@ interface FormInputProps
 }
 
 const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
-  ({ className, type = 'text', label, required = true, ...props }, ref) => {
+  ({ className, type = 'text', label, required = true, id, ...props }, ref) => {
     return (
       <>
         <div className="mb-3">
-          <label className="form-label">{label}</label>
+          <label className="form-label" htmlFor={id}>
+            {label}
+          </label>
           <input
             ref={ref}
             type={type}
+            id={id}
             className={clsx(['form-control', className])}
             required={required}
             {...props}

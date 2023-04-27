@@ -21,6 +21,10 @@ const useAppPage = () => {
       heading: 'Profile',
     },
     {
+      path: '/profile/edit',
+      heading: 'Edit Profile',
+    },
+    {
       path: '/facilities',
       heading: 'Find Facilities',
     },

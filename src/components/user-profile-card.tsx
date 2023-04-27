@@ -5,16 +5,21 @@ import FeatherEditIcon from './icons/feather-edit.icon';
 import Avatar from 'boring-avatars';
 import { User } from '@/providers/app-provider';
 
-const UserProfileCard: React.FC<{ user: User }> = ({ user }) => {
+const UserProfileCard: React.FC<{ user: User; showEdit?: boolean }> = ({
+  user,
+  showEdit = true,
+}) => {
   return (
     <>
       <div className="user-profile">
         <div className="user-content user-content-area">
           <div className="d-flex justify-content-between align-items-center px-3 py-2">
             <h3 className="">Your Details</h3>
-            <Link to="/profile/edit" className="mt-2 edit-profile">
-              <FeatherEditIcon />
-            </Link>
+            {showEdit && (
+              <Link to="/profile/edit" className="mt-2 edit-profile">
+                <FeatherEditIcon />
+              </Link>
+            )}
           </div>
           <div className="text-center user-info">
             <Avatar
