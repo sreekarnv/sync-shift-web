@@ -5,10 +5,11 @@ import useAppContext from '@/hooks/use-app-context';
 import IndexPage from '@/pages/app/index.page';
 import SignInPage from '@/pages/auth/signin.page';
 import SignupPage from '@/pages/auth/signup.page';
-import MembersPage from '@/pages/app/members.page';
+import MembersPage from '@/pages/app/members/members-index.page';
 import ProfilePage from '@/pages/app/profile/profile-index.page';
 import ProfileDetailPage from '@/pages/app/profile/profile-detail-page';
 import ProfileEditPage from '@/pages/app/profile/profile-edit-page';
+import FacilitiesPage from './pages/app/facilities/facilities-index.page';
 
 const AuthLayout = React.lazy(() => import('./layouts/auth.layout'));
 const AppLayout = React.lazy(() => import('./layouts/app.layout'));
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: '/profile/:id',
         element: <ProfileDetailPage />,
+      },
+      {
+        path: '/facilities',
+        element: <FacilitiesPage />,
       },
     ],
   },

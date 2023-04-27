@@ -61,6 +61,12 @@ const AppSidebar: React.FC<AppSidebarProps> = ({}) => {
               text="Find Members"
             />
 
+            <AppSidebarMenuItem
+              to="/facilities"
+              icon={<FeatherUsersIcon />}
+              text="Find Facilities"
+            />
+
             <AppSidebarMenuHeading>Settings</AppSidebarMenuHeading>
 
             <AppSidebarMenuItem

@@ -1,12 +1,6 @@
 import React from 'react';
 import '@/assets/css/components/data-table.css';
 
-interface DataTableProps {
-  data: any[];
-  columns: any[];
-  header?: React.ReactNode;
-}
-
 import {
   ColumnFiltersState,
   FilterFn,
@@ -20,10 +14,19 @@ import {
 
 import { rankItem } from '@tanstack/match-sorter-utils';
 
+import clsx from 'clsx';
+import FormInput from '@/components/forms/form-input';
+import { FormSelect } from '@/components/forms/form-select';
+
+interface FacilitesDataTableProps {
+  data: any[];
+  columns: any[];
+  header?: React.ReactNode;
+}
+
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   const itemRank = rankItem(row.getValue(columnId), value);
 
-  // Store the itemRank info
   addMeta({
     itemRank,
   });
@@ -31,14 +34,9 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   return itemRank.passed;
 };
 
-import clsx from 'clsx';
-import FormInput from '../forms/form-input';
-import { FormSelect } from '../forms/form-select';
-
-const DataTable: React.FC<DataTableProps> = ({
+const FacilitiesDataTable: React.FC<FacilitesDataTableProps> = ({
   data: defaultData,
   columns,
-  header,
 }) => {
   const [data] = React.useState(() => [...defaultData]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -73,25 +71,29 @@ const DataTable: React.FC<DataTableProps> = ({
         <div className="statbox widget box box-shadow">
           <div className="dt--top-section">
             <div className="row">
-              <div className="col-6 d-flex mt-sm-0 mt-3">
+              <div className="col-6 d-flex mt-sm-0 mt-3 align-items-center">
                 <FormSelect
                   onChange={(e) => {
                     setColumnFilters([
                       ...columnFilters,
-                      { id: 'role', value: e.target.value },
+                      { id: 'type', value: e.target.value },
                     ]);
                   }}
                   rootClassName="data-table-role-select-width"
-                  id="facilities"
-                  label="Filter Role By"
+                  id="facilities-type"
+                  label="Filter By"
                   options={[
                     {
-                      children: 'STUDENT',
-                      value: 'STUDENT',
+                      children: '---',
+                      value: '',
                     },
                     {
-                      children: 'STAFF',
-                      value: 'STAFF',
+                      children: 'Indoor',
+                      value: 'INDOOR',
+                    },
+                    {
+                      children: 'Outdoor',
+                      value: 'OUTDOOR',
                     },
                   ]}
                 />
@@ -165,4 +167,4 @@ const DataTable: React.FC<DataTableProps> = ({
   );
 };
 
-export default DataTable;
+export default FacilitiesDataTable;

@@ -1,5 +1,4 @@
-import { FormSelect } from '@/components/forms/form-select';
-import DataTable from '@/components/tables/data-table';
+import MembersDataTable from '@/components/tables/members/members-data-table';
 import { DataTableItem } from '@/components/tables/data-table-item';
 import { createColumnHelper } from '@tanstack/react-table';
 import React from 'react';
@@ -71,7 +70,13 @@ const columns = [
   columnHelper.accessor('role', {
     id: 'role',
     header: () => <span>Role</span>,
-    cell: (props) => <DataTableItem.RoleBadge role={props.getValue()} />,
+    cell: (props) => (
+      <DataTableItem.Badge
+        isPrimary={props.getValue().toString() === 'STUDENT'}
+      >
+        {props.getValue()}
+      </DataTableItem.Badge>
+    ),
   }),
 
   columnHelper.display({
@@ -84,7 +89,7 @@ const columns = [
 const MembersPage: React.FC<MembersPageProps> = ({}) => {
   return (
     <>
-      <DataTable data={defaultData} columns={columns} />
+      <MembersDataTable data={defaultData} columns={columns} />
     </>
   );
 };

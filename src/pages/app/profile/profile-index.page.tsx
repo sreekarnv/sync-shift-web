@@ -4,9 +4,8 @@ import useAppContext from '@/hooks/use-app-context';
 import useAppPage from '@/hooks/use-page';
 import UserProfileCard from '@/components/user-profile-card';
 import { createColumnHelper } from '@tanstack/react-table';
-import DataTable from '@/components/tables/data-table';
+import MembersDataTable from '@/components/tables/members/members-data-table';
 import { DataTableItem } from '@/components/tables/data-table-item';
-import { FormSelect } from '@/components/forms/form-select';
 
 type User = {
   id: number;
@@ -73,7 +72,12 @@ const columns = [
   columnHelper.accessor('role', {
     id: 'role',
     header: () => <span>Role</span>,
-    cell: (props) => <DataTableItem.RoleBadge role={props.getValue()} />,
+    cell: (props) => (
+      <DataTableItem.Badge
+        isPrimary={'STUDENT' === props.getValue()}
+        children={props.getValue()}
+      />
+    ),
   }),
 
   columnHelper.display({
@@ -109,7 +113,7 @@ const ProfilePage: React.FC = () => {
   return (
     <div className="row">
       <div className="col-md-9">
-        <DataTable columns={columns} data={defaultData} />
+        <MembersDataTable columns={columns} data={defaultData} />
         {/* <div className="row">
           <div className="col-md-7">
             <FormInput

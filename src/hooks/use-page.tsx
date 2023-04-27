@@ -20,6 +20,10 @@ const useAppPage = () => {
       path: '/profile',
       heading: 'Profile',
     },
+    {
+      path: '/facilities',
+      heading: 'Find Facilities',
+    },
   ]);
   const [current, setCurrent] = React.useState<AppPage>();
   const location = useLocation();
