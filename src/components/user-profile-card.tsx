@@ -25,11 +25,10 @@ const UserProfileCard: React.FC<{ user: User; showEdit?: boolean }> = ({
             <Avatar
               name={user.name}
               variant="beam"
-              size={100}
+              size={90}
               square={true}
               colors={['#92A1C6', '#146A7C', '#C271B4', '#C20D90']}
             />
-            {/* <img src="/images/profile.jpeg" alt="avatar" /> */}
             <p className="">{user.name}</p>
           </div>
           <div className="user-info-list pb-5">

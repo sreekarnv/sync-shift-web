@@ -15,11 +15,11 @@ export const Profile: React.FC<{ image: string; name: string }> = ({
   );
 };
 
-export const Action: React.FC<{ userId: string }> = ({ userId }) => {
+export const Action: React.FC<{ link: string }> = ({ link }) => {
   return (
     <>
       <span className="text-center">
-        <Link to={`/profile/${userId}`}>
+        <Link to={link}>
           <Button color="primary" className="btn-sm">
             View
           </Button>

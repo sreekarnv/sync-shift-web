@@ -82,7 +82,7 @@ const columns = [
   columnHelper.display({
     id: 'action',
     header: () => <span>Actions</span>,
-    cell: () => <DataTableItem.Action userId="userId" />,
+    cell: () => <DataTableItem.Action link="/members/2" />,
   }),
 ];
 
