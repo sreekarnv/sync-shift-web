@@ -241,9 +241,7 @@ const ProfilePage: React.FC = () => {
           </Box>
         </Modal> */}
       </div>
-      <div className="col-md-3">
-        <UserProfileCard />
-      </div>
+      <div className="col-md-3">{user && <UserProfileCard user={user} />}</div>
     </div>
   );
 };
