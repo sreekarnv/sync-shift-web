@@ -1,11 +1,5 @@
+import { User } from '@/types/User';
 import React from 'react';
-
-export interface User {
-  id: number;
-  role: string;
-  email: string;
-  name: string;
-}
 
 export interface AppContextProps {
   isLoading?: boolean;

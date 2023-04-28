@@ -2,15 +2,9 @@ import { DataTableItem } from '@/components/tables/data-table-item';
 import FacilitiesDataTable from '@/components/tables/facilities/facilites-data-table';
 import Loader from '@/components/ui/loader';
 import useFacilitiesQuery from '@/hooks/api/queries/use-facilities-query';
+import { Facility } from '@/types/Facility';
 import { createColumnHelper } from '@tanstack/react-table';
 import React from 'react';
-
-type Facility = {
-  id: number;
-  name: string;
-  type: string;
-  location: string;
-};
 
 const columnHelper = createColumnHelper<Facility>();
 
@@ -20,6 +14,12 @@ const columns = [
     header: () => <span>Name</span>,
     cell: (props) => props.getValue(),
     enableSorting: true,
+  }),
+
+  columnHelper.accessor('location', {
+    id: 'location',
+    header: () => <span>Location</span>,
+    cell: (props) => <span>{props.getValue()}</span>,
   }),
 
   columnHelper.accessor('type', {
@@ -33,10 +33,16 @@ const columns = [
     ),
   }),
 
-  columnHelper.accessor('location', {
-    id: 'location',
-    header: () => <span>Location</span>,
-    cell: (props) => <span>{props.getValue()}</span>,
+  columnHelper.accessor('isAvailable', {
+    id: 'Is Available',
+    header: () => <span>Availability</span>,
+    cell: (props) => (
+      <DataTableItem.Badge
+        isPrimary={props.getValue() === true}
+        invert
+        children={props.getValue() ? 'AVAILABLE' : 'UNAVAILABLE'}
+      />
+    ),
   }),
 
   columnHelper.display({

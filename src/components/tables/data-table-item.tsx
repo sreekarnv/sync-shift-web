@@ -38,13 +38,20 @@ export const Action: React.FC<{ link: string }> = ({ link }) => {
 export const Badge: React.FC<{
   isPrimary: boolean;
   children: React.ReactNode;
-}> = ({ isPrimary, children }) => {
+  invert?: boolean;
+}> = ({ isPrimary, children, invert }) => {
   return (
     <>
       <span
         className={clsx([
           'shadow-none badge',
-          isPrimary ? 'badge-secondary' : 'badge-dark',
+          isPrimary
+            ? invert
+              ? 'badge-success'
+              : 'badge-secondary'
+            : invert
+            ? 'badge-danger'
+            : 'badge-dark',
         ])}
       >
         {children}

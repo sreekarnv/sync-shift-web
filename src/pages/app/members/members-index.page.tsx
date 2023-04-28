@@ -4,15 +4,9 @@ import { createColumnHelper } from '@tanstack/react-table';
 import React from 'react';
 import useMembersQuery from '@/hooks/api/queries/use-members-query';
 import Loader from '@/components/ui/loader';
+import { User } from '@/types/User';
 
 interface MembersPageProps extends React.PropsWithChildren {}
-
-type User = {
-  id: number;
-  name: string;
-  email: string;
-  role: string;
-};
 
 const columnHelper = createColumnHelper<User>();
 

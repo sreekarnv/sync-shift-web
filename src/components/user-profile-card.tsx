@@ -3,9 +3,9 @@ import '@/assets/css/components/user-profile.css';
 import { Link } from 'react-router-dom';
 import FeatherEditIcon from './icons/feather-edit.icon';
 import Avatar from 'boring-avatars';
-import { User } from '@/providers/app-provider';
 import FeatherCoffeeIcon from './icons/feather-coffee.icon';
 import FeatherMailIcon from './icons/feather-mail.icon';
+import { User } from '@/types/User';
 
 const UserProfileCard: React.FC<{ user: User; showEdit?: boolean }> = ({
   user,
