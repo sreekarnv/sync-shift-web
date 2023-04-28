@@ -2,14 +2,20 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@/components/ui/button';
 import clsx from 'clsx';
+import Avatar from 'boring-avatars';
 
-export const Profile: React.FC<{ image: string; name: string }> = ({
+export const Profile: React.FC<{ image?: string; name: string }> = ({
   name,
-  image,
 }) => {
   return (
     <div className="d-flex align-items-center gap-2">
-      <img src={image} className="rounded-circle profile-img" alt="avatar" />
+      <div className="rounded-circle profile-img table-avatar-image">
+        <Avatar
+          variant="beam"
+          name={name}
+          colors={['#92A1C6', '#146A7C', '#C271B4', '#C20D90']}
+        />
+      </div>
       <span>{name}</span>
     </div>
   );

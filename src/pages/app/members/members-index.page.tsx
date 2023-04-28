@@ -2,63 +2,27 @@ import MembersDataTable from '@/components/tables/members/members-data-table';
 import { DataTableItem } from '@/components/tables/data-table-item';
 import { createColumnHelper } from '@tanstack/react-table';
 import React from 'react';
+import useMembersQuery from '@/hooks/api/queries/use-members-query';
+import Loader from '@/components/ui/loader';
 
 interface MembersPageProps extends React.PropsWithChildren {}
 
 type User = {
   id: number;
-  image: string;
   name: string;
   email: string;
   role: string;
 };
 
-const defaultData: User[] = [
-  {
-    name: 'tanner',
-    id: 24,
-    role: 'STUDENT',
-    email: 'tanner@email.com',
-    image: '/images/profile.jpeg',
-  },
-  {
-    name: 'tandy',
-    id: 40,
-    role: 'STAFF',
-    email: 'tandy@email.com',
-    image: '/images/profile.jpeg',
-  },
-  {
-    name: 'joe',
-    id: 45,
-    role: 'STUDENT',
-    email: 'joe@email.com',
-    image: '/images/profile.jpeg',
-  },
-];
-
 const columnHelper = createColumnHelper<User>();
 
 const columns = [
-  columnHelper.accessor(
-    (row) => {
-      return {
-        name: row.name,
-        image: row.image,
-      };
-    },
-    {
-      cell: (props) => (
-        <DataTableItem.Profile
-          name={props.getValue().name}
-          image={props.getValue().image}
-        />
-      ),
-      id: 'name',
-      header: () => <span>User</span>,
-      enableSorting: true,
-    }
-  ),
+  columnHelper.accessor((row) => row.name, {
+    cell: (props) => <DataTableItem.Profile name={props.getValue()} />,
+    id: 'name',
+    header: () => <span>User</span>,
+    enableSorting: true,
+  }),
 
   columnHelper.accessor('email', {
     id: 'email',
@@ -87,9 +51,13 @@ const columns = [
 ];
 
 const MembersPage: React.FC<MembersPageProps> = ({}) => {
+  const { isLoading, data } = useMembersQuery();
+
+  if (isLoading) return <Loader />;
+
   return (
     <>
-      <MembersDataTable data={defaultData} columns={columns} />
+      <MembersDataTable data={data} columns={columns} />
     </>
   );
 };

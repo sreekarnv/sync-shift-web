@@ -1,5 +1,7 @@
 import { DataTableItem } from '@/components/tables/data-table-item';
 import FacilitiesDataTable from '@/components/tables/facilities/facilites-data-table';
+import Loader from '@/components/ui/loader';
+import useFacilitiesQuery from '@/hooks/api/queries/use-facilities-query';
 import { createColumnHelper } from '@tanstack/react-table';
 import React from 'react';
 
@@ -9,27 +11,6 @@ type Facility = {
   type: string;
   location: string;
 };
-
-const defaultData: Facility[] = [
-  {
-    id: 21,
-    name: 'Music Room',
-    type: 'INDOOR',
-    location: 'SAC',
-  },
-  {
-    id: 24,
-    name: 'Chess Room',
-    type: 'INDOOR',
-    location: 'SAC',
-  },
-  {
-    id: 25,
-    name: 'Football Field',
-    type: 'OUTDOOR',
-    location: 'Mess 1',
-  },
-];
 
 const columnHelper = createColumnHelper<Facility>();
 
@@ -66,9 +47,13 @@ const columns = [
 ];
 
 const FacilitiesPage: React.FC = () => {
+  const { data, isLoading } = useFacilitiesQuery();
+
+  if (isLoading) return <Loader />;
+
   return (
     <>
-      <FacilitiesDataTable data={defaultData} columns={columns} />
+      <FacilitiesDataTable data={data} columns={columns} />
     </>
   );
 };

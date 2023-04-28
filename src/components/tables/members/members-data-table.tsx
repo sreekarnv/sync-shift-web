@@ -27,7 +27,6 @@ interface MembersDataTableProps {
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   const itemRank = rankItem(row.getValue(columnId), value);
 
-  // Store the itemRank info
   addMeta({
     itemRank,
   });
@@ -39,7 +38,7 @@ const MembersDataTable: React.FC<MembersDataTableProps> = ({
   data: defaultData,
   columns,
 }) => {
-  const [data] = React.useState(() => [...defaultData]);
+  const [data] = React.useState([...defaultData]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
