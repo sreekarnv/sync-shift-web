@@ -28,8 +28,8 @@ export const FormSelect: React.FC<FormSelectProps> = ({
     <div className={rootClassName}>
       <label htmlFor={id}>{label}</label>
       <select className="form-select" id={id} {...props}>
-        {options.map((option) => (
-          <FormOption {...option} key={option.label} />
+        {options.map((option, i) => (
+          <FormOption {...option} key={`${option.label}-${i}`} />
         ))}
       </select>
     </div>

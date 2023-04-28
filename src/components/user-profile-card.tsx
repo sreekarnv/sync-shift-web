@@ -2,184 +2,48 @@ import React from 'react';
 import '@/assets/css/components/user-profile.css';
 import { Link } from 'react-router-dom';
 import FeatherEditIcon from './icons/feather-edit.icon';
+import Avatar from 'boring-avatars';
+import { User } from '@/providers/app-provider';
+import FeatherCoffeeIcon from './icons/feather-coffee.icon';
+import FeatherMailIcon from './icons/feather-mail.icon';
 
-const UserProfileCard: React.FC = () => {
+const UserProfileCard: React.FC<{ user: User; showEdit?: boolean }> = ({
+  user,
+  showEdit = true,
+}) => {
   return (
     <>
       <div className="user-profile">
         <div className="user-content user-content-area">
           <div className="d-flex justify-content-between align-items-center px-3 py-2">
             <h3 className="">Your Details</h3>
-            <Link to="/profile/edit" className="mt-2 edit-profile">
-              <FeatherEditIcon />
-            </Link>
+            {showEdit && (
+              <Link to="/profile/edit" className="mt-2 edit-profile">
+                <FeatherEditIcon />
+              </Link>
+            )}
           </div>
           <div className="text-center user-info">
-            <img src="/images/profile.jpeg" alt="avatar" />
-            <p className="">Jimmy Turner</p>
+            <Avatar
+              name={user.name}
+              variant="beam"
+              size={90}
+              square={true}
+              colors={['#92A1C6', '#146A7C', '#C271B4', '#C20D90']}
+            />
+            <p className="">{user.name}</p>
           </div>
-          <div className="user-info-list">
+          <div className="user-info-list pb-5">
             <div className="">
               <ul className="contacts-block list-unstyled">
-                <li className="contacts-block__item">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="feather feather-coffee me-3"
-                  >
-                    <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-                    <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-                    <line x1="6" y1="1" x2="6" y2="4"></line>
-                    <line x1="10" y1="1" x2="10" y2="4"></line>
-                    <line x1="14" y1="1" x2="14" y2="4"></line>
-                  </svg>{' '}
-                  Web Developer
+                <li className="contacts-block__item d-flex items-center">
+                  <FeatherCoffeeIcon />
+                  <span className="ms-3">{user.role}</span>
                 </li>
-                <li className="contacts-block__item">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="feather feather-calendar me-3"
-                  >
-                    <rect
-                      x="3"
-                      y="4"
-                      width="18"
-                      height="18"
-                      rx="2"
-                      ry="2"
-                    ></rect>
-                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                  </svg>
-                  Jan 20, 1989
-                </li>
-                <li className="contacts-block__item">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="feather feather-map-pin me-3"
-                  >
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                    <circle cx="12" cy="10" r="3"></circle>
-                  </svg>
-                  New York, USA
-                </li>
-                <li className="contacts-block__item">
-                  <a href="mailto:example@mail.com">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="feather feather-mail me-3"
-                    >
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                      <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                    Jimmy@gmail.com
-                  </a>
-                </li>
-                <li className="contacts-block__item">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="feather feather-phone me-3"
-                  >
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                  </svg>{' '}
-                  +1 (530) 555-12121
-                </li>
-              </ul>
-
-              <ul className="list-inline mt-4">
-                <li className="list-inline-item mb-0">
-                  <a className="btn btn-info btn-icon btn-rounded" href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="feather feather-twitter"
-                    >
-                      <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-                    </svg>
-                  </a>
-                </li>
-                <li className="list-inline-item mb-0">
-                  <a className="btn btn-danger btn-icon btn-rounded" href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="feather feather-dribbble"
-                    >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"></path>
-                    </svg>
-                  </a>
-                </li>
-                <li className="list-inline-item mb-0">
-                  <a className="btn btn-dark btn-icon btn-rounded" href="#">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="feather feather-github"
-                    >
-                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                    </svg>
+                <li className="contacts-block__item text-truncate">
+                  <FeatherMailIcon />
+                  <a className="ms-3" href={`mailto:${user.email}`}>
+                    {user.email}
                   </a>
                 </li>
               </ul>

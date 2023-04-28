@@ -1,12 +1,6 @@
 import React from 'react';
 import '@/assets/css/components/data-table.css';
 
-interface DataTableProps {
-  data: any[];
-  columns: any[];
-  header?: React.ReactNode;
-}
-
 import {
   ColumnFiltersState,
   FilterFn,
@@ -20,10 +14,19 @@ import {
 
 import { rankItem } from '@tanstack/match-sorter-utils';
 
+import clsx from 'clsx';
+import FormInput from '@/components/forms/form-input';
+import { FormSelect } from '@/components/forms/form-select';
+
+interface MembersDataTableProps {
+  data: any[];
+  columns: any[];
+  header?: React.ReactNode;
+}
+
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   const itemRank = rankItem(row.getValue(columnId), value);
 
-  // Store the itemRank info
   addMeta({
     itemRank,
   });
@@ -31,16 +34,11 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
   return itemRank.passed;
 };
 
-import clsx from 'clsx';
-import FormInput from '../forms/form-input';
-import { FormSelect } from '../forms/form-select';
-
-const DataTable: React.FC<DataTableProps> = ({
+const MembersDataTable: React.FC<MembersDataTableProps> = ({
   data: defaultData,
   columns,
-  header,
 }) => {
-  const [data] = React.useState(() => [...defaultData]);
+  const [data] = React.useState([...defaultData]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -73,7 +71,7 @@ const DataTable: React.FC<DataTableProps> = ({
         <div className="statbox widget box box-shadow">
           <div className="dt--top-section">
             <div className="row">
-              <div className="col-6 d-flex mt-sm-0 mt-3">
+              <div className="col-6 d-flex mt-sm-0 mt-3 align-items-center">
                 <FormSelect
                   onChange={(e) => {
                     setColumnFilters([
@@ -85,6 +83,10 @@ const DataTable: React.FC<DataTableProps> = ({
                   id="facilities"
                   label="Filter Role By"
                   options={[
+                    {
+                      children: '---',
+                      value: '',
+                    },
                     {
                       children: 'STUDENT',
                       value: 'STUDENT',
@@ -165,4 +167,4 @@ const DataTable: React.FC<DataTableProps> = ({
   );
 };
 
-export default DataTable;
+export default MembersDataTable;

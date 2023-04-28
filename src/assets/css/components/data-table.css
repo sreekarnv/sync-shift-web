@@ -418,3 +418,13 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 .data-table-role-select-width {
   width: 30%;
 }
+
+.table-avatar-image {
+  height: 40px;
+  width: 40px;
+}
+
+.table-avatar-image svg {
+  height: 100% !important;
+  width: 100% !important;
+}

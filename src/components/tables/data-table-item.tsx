@@ -1,25 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../ui/button';
+import Button from '@/components/ui/button';
 import clsx from 'clsx';
+import Avatar from 'boring-avatars';
 
-export const Profile: React.FC<{ image: string; name: string }> = ({
+export const Profile: React.FC<{ image?: string; name: string }> = ({
   name,
-  image,
 }) => {
   return (
     <div className="d-flex align-items-center gap-2">
-      <img src={image} className="rounded-circle profile-img" alt="avatar" />
+      <div className="rounded-circle profile-img table-avatar-image">
+        <Avatar
+          variant="beam"
+          name={name}
+          colors={['#92A1C6', '#146A7C', '#C271B4', '#C20D90']}
+        />
+      </div>
       <span>{name}</span>
     </div>
   );
 };
 
-export const Action: React.FC<{ userId: string }> = ({ userId }) => {
+export const Action: React.FC<{ link: string }> = ({ link }) => {
   return (
     <>
       <span className="text-center">
-        <Link to={`/profile/${userId}`}>
+        <Link to={link}>
           <Button color="primary" className="btn-sm">
             View
           </Button>
@@ -29,16 +35,19 @@ export const Action: React.FC<{ userId: string }> = ({ userId }) => {
   );
 };
 
-export const RoleBadge: React.FC<{ role: string }> = ({ role }) => {
+export const Badge: React.FC<{
+  isPrimary: boolean;
+  children: React.ReactNode;
+}> = ({ isPrimary, children }) => {
   return (
     <>
       <span
         className={clsx([
           'shadow-none badge',
-          role === 'STUDENT' ? 'badge-secondary' : 'badge-dark',
+          isPrimary ? 'badge-secondary' : 'badge-dark',
         ])}
       >
-        {role}
+        {children}
       </span>
     </>
   );
@@ -47,5 +56,5 @@ export const RoleBadge: React.FC<{ role: string }> = ({ role }) => {
 export const DataTableItem = {
   Profile,
   Action,
-  RoleBadge,
+  Badge,
 };

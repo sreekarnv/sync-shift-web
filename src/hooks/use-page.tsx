@@ -17,16 +17,37 @@ const useAppPage = () => {
       heading: 'Find Members',
     },
     {
+      path: '/members/',
+      heading: 'Member Details',
+    },
+    {
       path: '/profile',
       heading: 'Profile',
+    },
+    {
+      path: '/profile/edit',
+      heading: 'Edit Profile',
+    },
+    {
+      path: '/facilities',
+      heading: 'Find Facilities',
     },
   ]);
   const [current, setCurrent] = React.useState<AppPage>();
   const location = useLocation();
 
   React.useEffect(() => {
-    const route = routes.find((route) => route.path === location.pathname);
+    const route = routes.find((route) =>
+      route.path.startsWith(location.pathname)
+    );
+
     if (route) setCurrent(route);
+    else {
+      setCurrent({
+        path: location.pathname,
+        heading: 'Detail',
+      });
+    }
   }, [location.pathname]);
 
   return {

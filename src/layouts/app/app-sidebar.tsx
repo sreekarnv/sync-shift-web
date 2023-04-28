@@ -7,6 +7,7 @@ import Avatar from 'boring-avatars';
 import React from 'react';
 import AppSidebarMenuHeading from './app-sidebar-menu-heading';
 import AppSidebarMenuItem from './app-sidebar-menu-item';
+import { Link } from 'react-router-dom';
 
 interface AppSidebarProps extends React.PropsWithChildren {}
 
@@ -22,10 +23,10 @@ const AppSidebar: React.FC<AppSidebarProps> = ({}) => {
           <div className="navbar-nav theme-brand flex-row  text-center">
             <div className="nav-logo">
               <div className="nav-item theme-text">
-                <a href="index.html" className="nav-link">
+                <Link to="/" className="nav-link">
                   {' '}
                   BITS TCS{' '}
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -59,6 +60,12 @@ const AppSidebar: React.FC<AppSidebarProps> = ({}) => {
               to="/members"
               icon={<FeatherUsersIcon />}
               text="Find Members"
+            />
+
+            <AppSidebarMenuItem
+              to="/facilities"
+              icon={<FeatherUsersIcon />}
+              text="Find Facilities"
             />
 
             <AppSidebarMenuHeading>Settings</AppSidebarMenuHeading>
