@@ -1,0 +1,10 @@
+.facility-location {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.facility-location-icon {
+  height: 1.2rem;
+  width: 1.2rem;
+}

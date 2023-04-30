@@ -45,17 +45,19 @@ const columns = [
     ),
   }),
 
-  columnHelper.display({
+  columnHelper.accessor('id', {
     id: 'action',
     header: () => <span>Actions</span>,
-    cell: () => <DataTableItem.Action link="/facilities/2" />,
+    cell: (props) => (
+      <DataTableItem.Action link={'/facilities/' + props.getValue()} />
+    ),
   }),
 ];
 
 const FacilitiesPage: React.FC = () => {
   const { data, isLoading } = useFacilitiesQuery();
 
-  if (isLoading) return <Loader />;
+  if (isLoading || !data) return <Loader />;
 
   return (
     <>

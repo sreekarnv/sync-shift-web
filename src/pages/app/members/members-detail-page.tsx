@@ -1,13 +1,14 @@
+import Calendar from '@/components/calendar';
 import UserProfileCard from '@/components/user-profile-card';
 import React from 'react';
-import { MyCalendar } from '../index.page';
+import { events } from '../index.page';
 
 const MembersDetailPage: React.FC = () => {
   return (
     <>
       <div className="row">
         <div className="col-md-9">
-          <MyCalendar />
+          <Calendar events={events} />
         </div>
         <div className="col-md-3">
           {

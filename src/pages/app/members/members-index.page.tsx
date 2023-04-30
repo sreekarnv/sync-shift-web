@@ -37,17 +37,19 @@ const columns = [
     ),
   }),
 
-  columnHelper.display({
+  columnHelper.accessor('id', {
     id: 'action',
     header: () => <span>Actions</span>,
-    cell: () => <DataTableItem.Action link="/members/2" />,
+    cell: (props) => {
+      return <DataTableItem.Action link={`/members/${props.getValue()}`} />;
+    },
   }),
 ];
 
 const MembersPage: React.FC<MembersPageProps> = ({}) => {
   const { isLoading, data } = useMembersQuery();
 
-  if (isLoading) return <Loader />;
+  if (isLoading || !data) return <Loader />;
 
   return (
     <>
