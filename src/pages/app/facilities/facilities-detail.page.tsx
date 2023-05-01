@@ -21,8 +21,6 @@ const FacilitiesDetailPage: React.FC = () => {
       };
     }) ?? [];
 
-  console.log(events);
-
   if (!data || !slotsData) return <Loader />;
 
   return (

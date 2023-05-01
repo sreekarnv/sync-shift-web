@@ -1,23 +1,23 @@
 import React from 'react';
-import { Event } from 'react-big-calendar';
 import Calendar from '@/components/calendar';
-
-export const events: Event[] = [
-  {
-    title: 'All Day Event very long title',
-    start: new Date('2023-04-26T10:00'),
-    end: new Date('2023-04-26T10:40'),
-    resource: 'test',
-  },
-  {
-    title: 'Long Event',
-    start: new Date('2023-04-29T23:00'),
-    end: new Date('2023-04-29T23:39'),
-  },
-];
+import useUserFacilitySlotsQuery from '@/hooks/api/queries/use-user-facility-slots';
+import Loader from '@/components/ui/loader';
 
 const IndexPage: React.FC = () => {
-  return <Calendar events={events} />;
+  const { data, isLoading } = useUserFacilitySlotsQuery();
+
+  const eData =
+    data?.map((slot) => {
+      return {
+        title: slot.facility.name + ' - ' + slot.facility.type,
+        start: new Date(slot.startTimeStamp),
+        end: new Date(slot.endTimeStamp),
+      };
+    }) ?? [];
+
+  if (isLoading) return <Loader />;
+
+  return <Calendar events={eData} />;
 };
 
 export default IndexPage;

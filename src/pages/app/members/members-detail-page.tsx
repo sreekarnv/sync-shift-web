@@ -1,7 +1,22 @@
 import Calendar from '@/components/calendar';
 import UserProfileCard from '@/components/user-profile-card';
 import React from 'react';
-import { events } from '../index.page';
+import { Event } from 'react-big-calendar';
+// import { events } from '../index.page';
+
+export const events: Event[] = [
+  {
+    title: 'All Day Event very long title',
+    start: new Date('2023-04-26T10:00'),
+    end: new Date('2023-04-26T10:40'),
+    resource: 'test',
+  },
+  {
+    title: 'Long Event',
+    start: new Date('2023-04-29T23:00'),
+    end: new Date('2023-04-29T23:39'),
+  },
+];
 
 const MembersDetailPage: React.FC = () => {
   return (
