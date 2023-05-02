@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import useFacilityQuery from '@/hooks/api/queries/use-facility-query';
 import Loader from '@/components/ui/loader';
 import FeatherLocationIcon from '@/components/icons/feather-location.icon';
@@ -102,106 +102,121 @@ const FacilitiesDetailPage: React.FC = () => {
             </div>
             <div className="col-md-8 d-flex align-items-end flex-column justify-content-center">
               {data.isAvailable ? (
-                <h6 className="text-success fw-semibold">
-                  Available from {data?.availableStartTime} to{' '}
-                  {data?.availableEndTime} everyday
-                </h6>
+                <>
+                  <h6 className="text-success fw-semibold">
+                    Available from {data?.availableStartTime} to{' '}
+                    {data?.availableEndTime} everyday
+                  </h6>
+                  <Button onClick={() => setShowForm(!showForm)} color="info">
+                    Book Slot
+                  </Button>
+                </>
               ) : (
                 <>
                   <h6 className="text-danger fw-semibold">Not Available</h6>
                 </>
               )}
-              <Button onClick={() => setShowForm(!showForm)} color="info">
-                Book Slot
-              </Button>
             </div>
 
-            <div className="mt-5">
-              <div className="row">
-                <div className={showForm ? 'col-md-8' : 'col-md-12'}>
-                  <Calendar height="70vh" events={events} />
-                </div>
-                {showForm && (
-                  <div className="col-md-4">
-                    {hasConflict && (
-                      <FormError
-                        error={
-                          {
-                            response: {
-                              data: {
-                                errors: [hasConflict],
-                              },
-                            },
-                          } as any
-                        }
-                      />
-                    )}
-
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                      <div className="mb-4">
-                        <label
-                          htmlFor="date"
-                          className="d-flex items-center gap-5 align-items-center"
-                        >
-                          Select Date
-                          <Button
-                            color="info"
-                            onClick={() =>
-                              setShowDateCalendar(!showDateCalendar)
-                            }
-                            type="button"
-                          >
-                            {showDateCalendar ? 'Hide' : 'Show'}
-                          </Button>
-                        </label>
-
-                        <DayPicker
-                          mode="single"
-                          selected={selected}
-                          // @ts-ignore
-                          onSelect={setSelected}
-                          onDayClick={(p) => {
-                            setValue('date', p.toLocaleDateString());
-                          }}
-                          fromYear={new Date().getFullYear()}
-                          className={showDateCalendar ? '' : 'd-none'}
-                        />
-                      </div>
-
-                      <div className="mb-3">
-                        <FormInput
-                          label="Select Start Time"
-                          id="startTime"
-                          type="time"
-                          {...register('startTime', { required: true })}
-                        />
-                        <small>
-                          <strong>Note:</strong> Allowed time is between{' '}
-                          {data?.availableStartTime} to {data?.availableEndTime}
-                        </small>
-                      </div>
-
-                      <div className="mb-3">
-                        <FormInput
-                          label="Select End Time"
-                          id="endTime"
-                          type="time"
-                          {...register('endTime', { required: true })}
-                        />
-                        <small>
-                          <strong>Note:</strong> Allowed time is between{' '}
-                          {data?.availableStartTime} to {data?.availableEndTime}
-                        </small>
-                      </div>
-
-                      <Button isLoading={isLoading} type="submit">
-                        Book Slot
-                      </Button>
-                    </form>
+            {data.isAvailable && (
+              <div className="mt-5">
+                <div className="row">
+                  <div className={showForm ? 'col-md-8' : 'col-md-12'}>
+                    <Calendar height="70vh" events={events} />
                   </div>
-                )}
+                  {showForm && (
+                    <div className="col-md-4">
+                      {hasConflict && (
+                        <FormError
+                          error={
+                            {
+                              response: {
+                                data: {
+                                  errors: [hasConflict],
+                                },
+                              },
+                            } as any
+                          }
+                        />
+                      )}
+
+                      <form onSubmit={handleSubmit(onSubmit)}>
+                        <div className="mb-4">
+                          <label
+                            htmlFor="date"
+                            className="d-flex items-center gap-5 align-items-center"
+                          >
+                            Select Date
+                            <Button
+                              color="info"
+                              onClick={() =>
+                                setShowDateCalendar(!showDateCalendar)
+                              }
+                              type="button"
+                            >
+                              {showDateCalendar ? 'Hide' : 'Show'}
+                            </Button>
+                          </label>
+
+                          <DayPicker
+                            mode="single"
+                            selected={selected}
+                            // @ts-ignore
+                            onSelect={setSelected}
+                            onDayClick={(p) => {
+                              setValue('date', p.toLocaleDateString());
+                            }}
+                            fromYear={new Date().getFullYear()}
+                            className={showDateCalendar ? '' : 'd-none'}
+                          />
+                        </div>
+
+                        <div className="mb-3">
+                          <FormInput
+                            label="Select Start Time"
+                            id="startTime"
+                            type="time"
+                            {...register('startTime', { required: true })}
+                          />
+                          <small>
+                            <strong>Note:</strong> Allowed time is between{' '}
+                            {data?.availableStartTime} to{' '}
+                            {data?.availableEndTime}
+                          </small>
+                        </div>
+
+                        <div className="mb-3">
+                          <FormInput
+                            label="Select End Time"
+                            id="endTime"
+                            type="time"
+                            {...register('endTime', { required: true })}
+                          />
+                          <small>
+                            <strong>Note:</strong> Allowed time is between{' '}
+                            {data?.availableStartTime} to{' '}
+                            {data?.availableEndTime}
+                          </small>
+                        </div>
+
+                        <Button isLoading={isLoading} type="submit">
+                          Book Slot
+                        </Button>
+                      </form>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
+
+            {!data.isAvailable && (
+              <div className="mt-5 text-center">
+                <h3 className="mb-4">This facility is Currently Unavailable</h3>
+                <Link to="/facilities">
+                  <Button color="dark">Back to Facilities</Button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
