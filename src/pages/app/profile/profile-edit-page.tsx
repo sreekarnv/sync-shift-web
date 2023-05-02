@@ -1,26 +1,27 @@
 // import FormError from '@/components/forms/form-error';
+import FormError from '@/components/forms/form-error';
 import FormInput from '@/components/forms/form-input';
 import Button from '@/components/ui/button';
 import UserProfileCard from '@/components/user-profile-card';
+import useUpdatePasswordMutation from '@/hooks/api/mutations/use-update-password-mutation';
 import useAppContext from '@/hooks/use-app-context';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 
 type UpdatePasswordInput = {
-  currentPassword: string;
-  password: string;
-  confirmPassword: string;
+  oldPassword: string;
+  newPassword: string;
 };
 
 const ProfileEditPage: React.FC = () => {
   const { register, handleSubmit } = useForm<UpdatePasswordInput>({
     defaultValues: {
-      currentPassword: '',
-      password: '',
-      confirmPassword: '',
+      oldPassword: '',
+      newPassword: '',
     },
   });
+
+  const { error, mutate } = useUpdatePasswordMutation();
 
   const { user } = useAppContext();
 
@@ -34,6 +35,7 @@ const ProfileEditPage: React.FC = () => {
               autoComplete="off"
               onSubmit={handleSubmit((data) => {
                 console.log(data);
+                mutate(data);
               })}
               noValidate
             >
@@ -42,31 +44,23 @@ const ProfileEditPage: React.FC = () => {
                 <p>Enter your current password and new password to continue</p>
               </div>
 
-              {/* <FormError error={error} /> */}
+              <FormError error={error} />
 
               <div className="col-md-12">
                 <FormInput
                   className="add-billing-address-input"
                   label="Current Password"
                   type="password"
-                  id="currentPassword"
-                  {...register('currentPassword')}
+                  id="oldPassword"
+                  {...register('oldPassword')}
                 />
               </div>
               <div className="col-md-12">
                 <FormInput
                   type="password"
-                  label="password"
-                  id="password"
-                  {...register('password')}
-                />
-              </div>
-              <div className="col-12">
-                <FormInput
-                  type="password"
-                  label="Confirm Password"
-                  id="confirmPassword"
-                  {...register('confirmPassword')}
+                  label="New Password"
+                  id="newPassword"
+                  {...register('newPassword')}
                 />
               </div>
 
