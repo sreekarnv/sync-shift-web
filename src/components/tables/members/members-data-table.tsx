@@ -38,7 +38,7 @@ const MembersDataTable: React.FC<MembersDataTableProps> = ({
   data: defaultData,
   columns,
 }) => {
-  const [data] = React.useState([...defaultData]);
+  const [data, setData] = React.useState<any[]>([]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -64,6 +64,12 @@ const MembersDataTable: React.FC<MembersDataTableProps> = ({
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
+
+  React.useEffect(() => {
+    if (defaultData?.length) {
+      setData([...defaultData]);
+    }
+  }, [defaultData]);
 
   return (
     <div className="row layout-spacing">

@@ -4,12 +4,16 @@ import UserProfileCard from '@/components/user-profile-card';
 import useAuthUserFacilitySlotsQuery from '@/hooks/api/queries/use-auth-user-facility-slots';
 import Loader from '@/components/ui/loader';
 import Calendar from '@/components/calendar';
+import useMemberSlotsQuery from '@/hooks/api/queries/use-member-slots-query';
 
 const ProfilePage: React.FC = () => {
   const { user } = useAppContext();
   const { isLoading, data } = useAuthUserFacilitySlotsQuery();
+  const { isLoading: isMLoading, data: mData } = useMemberSlotsQuery(
+    user?.id ?? ''
+  );
 
-  const events =
+  const fEvents =
     data?.map((slot) => {
       return {
         title: 'Booked',
@@ -18,7 +22,22 @@ const ProfilePage: React.FC = () => {
       };
     }) ?? [];
 
-  if (isLoading) return <Loader />;
+  const mEvents =
+    mData?.map((slot) => {
+      return {
+        title:
+          'Member Meet With - ' +
+          slot.accepted.name +
+          ' -' +
+          `(${slot.accepted.role})`,
+        start: new Date(slot.startTimeStamp),
+        end: new Date(slot.endTimeStamp),
+      };
+    }) ?? [];
+
+  const events = [...fEvents, ...mEvents];
+
+  if (isLoading || isMLoading) return <Loader />;
 
   return (
     <div className="row">

@@ -10,6 +10,9 @@ import { useParams } from 'react-router-dom';
 import FormInput from '@/components/forms/form-input';
 import Button from '@/components/ui/button';
 import FormError from '@/components/forms/form-error';
+import Calendar from '@/components/calendar';
+import useBookMemberMutation from '@/hooks/api/mutations/use-book-member-mutation';
+import useMemberSlotsQuery from '@/hooks/api/queries/use-member-slots-query';
 
 export const constructDateObject = (dateStr: string, timeStr: string) => {
   const [monthStr, dayStr, yearStr] = dateStr.split('/');
@@ -32,15 +35,19 @@ const MembersDetailPage: React.FC = () => {
     params.id!
   );
   const { isLoading, data } = useMemberDetailQuery(params.id!);
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm();
+  const { isLoading: isMLoading, data: mData } = useMemberSlotsQuery(
+    params.id!
+  );
+  const { register, handleSubmit, setValue } = useForm();
+
+  const { mutate: bookSlot, isLoading: isBookSlotLoading } =
+    useBookMemberMutation(params.id!, () => {
+      setShowFormOrCal(false);
+    });
 
   const [selected, setSelected] = React.useState<Date>(new Date());
   const [showDateCalendar, setShowDateCalendar] = React.useState(false);
+  const [showFormOrCal, setShowFormOrCal] = React.useState(false);
 
   const onSubmit = (data: any) => {
     setHasConflict(null);
@@ -64,79 +71,135 @@ const MembersDetailPage: React.FC = () => {
       setHasConflict('This Slot is already been booked or is unavailable');
       return;
     }
-
     // Mutate
-    console.log(newStartDate, newEndDate);
+    bookSlot({
+      startTimeStamp: newStartDate
+        .toISOString()
+        .replace('T', ' ')
+        .replace('Z', ''),
+      endTimeStamp: newEndDate.toISOString().replace('T', ' ').replace('Z', ''),
+    });
   };
 
-  if (isLoading || isFLoading || !data || !fData) return <></>;
+  const eventsf =
+    fData?.map((slot) => {
+      return {
+        title: 'Facility Booked - ' + slot.facility.name,
+        start: new Date(slot.startTimeStamp),
+        end: new Date(slot.endTimeStamp),
+      };
+    }) ?? [];
+
+  const eventsM =
+    mData?.map((slot) => {
+      return {
+        title: 'Member Meet',
+        start: new Date(slot.startTimeStamp),
+        end: new Date(slot.endTimeStamp),
+      };
+    }) ?? [];
+
+  const events = [...eventsf, ...eventsM];
+
+  if (isLoading || isFLoading || !data || !fData || isMLoading || !mData)
+    return <></>;
 
   return (
     <>
       <div className="row">
         <div className="col-md-9">
-          <h2 className="mb-5">Book Slot</h2>
-
-          {hasConflict && (
-            <FormError
-              error={
-                {
-                  response: {
-                    data: {
-                      errors: [hasConflict],
-                    },
-                  },
-                } as any
-              }
-            />
-          )}
-
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="mb-4">
-              <label
-                htmlFor="date"
-                className="d-flex items-center gap-5 align-items-center"
-              >
-                Select Date
-                <Button
-                  color="info"
-                  onClick={() => setShowDateCalendar(!showDateCalendar)}
-                  type="button"
-                >
-                  {showDateCalendar ? 'Hide' : 'Show'}
-                </Button>
-              </label>
-
-              <DayPicker
-                mode="single"
-                selected={selected}
-                // @ts-ignore
-                onSelect={setSelected}
-                onDayClick={(p) => {
-                  setValue('date', p.toLocaleDateString());
-                }}
-                fromYear={new Date().getFullYear()}
-                className={showDateCalendar ? '' : 'd-none'}
-              />
+          <div className="d-flex justify-content-between">
+            <div>
+              <h2>Member Schedule</h2>
+              <p className="mb-5">
+                This member is available from {data.defaultStartAvailableTime}{' '}
+                to {data.defaultEndAvailableTime}{' '}
+              </p>
             </div>
+            <div>
+              <Button
+                onClick={() => setShowFormOrCal(false)}
+                variant="outline"
+                className="mx-2"
+              >
+                Show Calendar
+              </Button>
+              <Button onClick={() => setShowFormOrCal(true)} color="dark">
+                Book Slot
+              </Button>
+            </div>
+          </div>
 
-            <FormInput
-              label="Select Start Time"
-              id="startTime"
-              type="time"
-              {...register('startTime', { required: true })}
-            />
+          <div>
+            {!showFormOrCal && <Calendar events={events} />}
 
-            <FormInput
-              label="Select End Time"
-              id="endTime"
-              type="time"
-              {...register('endTime', { required: true })}
-            />
+            {showFormOrCal && (
+              <>
+                {hasConflict && (
+                  <FormError
+                    error={
+                      {
+                        response: {
+                          data: {
+                            errors: [hasConflict],
+                          },
+                        },
+                      } as any
+                    }
+                  />
+                )}
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="mb-4">
+                    <label
+                      htmlFor="date"
+                      className="d-flex items-center gap-5 align-items-center"
+                    >
+                      Select Date
+                      <Button
+                        color="info"
+                        onClick={() => setShowDateCalendar(!showDateCalendar)}
+                        type="button"
+                      >
+                        {showDateCalendar ? 'Hide' : 'Show'}
+                      </Button>
+                    </label>
 
-            <Button type="submit">Book Slot</Button>
-          </form>
+                    <DayPicker
+                      mode="single"
+                      selected={selected}
+                      // @ts-ignore
+                      onSelect={setSelected}
+                      onDayClick={(p) => {
+                        setValue('date', p.toLocaleDateString());
+                      }}
+                      fromYear={new Date().getFullYear()}
+                      className={showDateCalendar ? '' : 'd-none'}
+                    />
+                  </div>
+
+                  <FormInput
+                    label="Select Start Time"
+                    id="startTime"
+                    type="time"
+                    {...register('startTime', { required: true })}
+                  />
+
+                  <FormInput
+                    label="Select End Time"
+                    id="endTime"
+                    type="time"
+                    {...register('endTime', { required: true })}
+                  />
+
+                  <Button isLoading={isBookSlotLoading} type="submit">
+                    Book Slot
+                  </Button>
+                </form>
+              </>
+            )}
+          </div>
         </div>
+
         <div className="col-md-3">
           {<UserProfileCard showEdit={false} user={data} />}
         </div>
