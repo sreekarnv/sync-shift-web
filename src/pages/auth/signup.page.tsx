@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import useSignupMutation, {
   SignupUserInput,
-} from '@/hooks/api/mutations/auth/use-signup-mutation';
+} from '@/hooks/api/mutations/use-signup-mutation';
 import FormError from '@/components/forms/form-error';
 import Button from '@/components/ui/button';
 import { FormRadio, FormRadioGroup } from '@/components/forms/form-radio';

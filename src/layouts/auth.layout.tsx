@@ -7,8 +7,10 @@ import useAppContext from '@/hooks/use-app-context';
 const AuthLayout: React.FC = () => {
   const { user } = useAppContext();
 
-  if (user) {
+  if (user && user.defaultStartAvailableTime) {
     return <Navigate to="/" replace />;
+  } else if (user && !user.defaultEndAvailableTime) {
+    return <Navigate to="/set-availability" replace />;
   }
 
   return (

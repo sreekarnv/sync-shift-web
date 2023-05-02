@@ -1,10 +1,10 @@
 import React from 'react';
 import Calendar from '@/components/calendar';
-import useUserFacilitySlotsQuery from '@/hooks/api/queries/use-user-facility-slots';
+import useAuthUserFacilitySlotsQuery from '@/hooks/api/queries/use-auth-user-facility-slots';
 import Loader from '@/components/ui/loader';
 
 const IndexPage: React.FC = () => {
-  const { data, isLoading } = useUserFacilitySlotsQuery();
+  const { data, isLoading } = useAuthUserFacilitySlotsQuery();
 
   const eData =
     data?.map((slot) => {

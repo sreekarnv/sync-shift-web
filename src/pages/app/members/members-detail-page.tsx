@@ -1,42 +1,25 @@
-import Calendar from '@/components/calendar';
 import UserProfileCard from '@/components/user-profile-card';
+import useMemberDetailQuery from '@/hooks/api/queries/use-member-detail-query';
+import useUserFacilitySlotsQuery from '@/hooks/api/queries/use-user-facility-slots-query';
 import React from 'react';
-import { Event } from 'react-big-calendar';
-// import { events } from '../index.page';
-
-export const events: Event[] = [
-  {
-    title: 'All Day Event very long title',
-    start: new Date('2023-04-26T10:00'),
-    end: new Date('2023-04-26T10:40'),
-    resource: 'test',
-  },
-  {
-    title: 'Long Event',
-    start: new Date('2023-04-29T23:00'),
-    end: new Date('2023-04-29T23:39'),
-  },
-];
+import { useParams } from 'react-router-dom';
 
 const MembersDetailPage: React.FC = () => {
+  const params = useParams<{ id: string }>();
+  const { isLoading: isFLoading, data: fData } = useUserFacilitySlotsQuery(
+    params.id!
+  );
+  const { isLoading, data } = useMemberDetailQuery(params.id!);
+
+  if (isLoading || isFLoading || !data || !fData) return <></>;
+
   return (
     <>
       <div className="row">
         <div className="col-md-9">
-          <Calendar events={events} />
+          <pre>{JSON.stringify(fData, null, 2)}</pre>
         </div>
-        <div className="col-md-3">
-          {
-            <UserProfileCard
-              user={{
-                id: 12,
-                name: 'John Doe',
-                email: 'john@email.com',
-                role: 'STAFF',
-              }}
-            />
-          }
-        </div>
+        <div className="col-md-3">{<UserProfileCard user={data} />}</div>
       </div>
     </>
   );

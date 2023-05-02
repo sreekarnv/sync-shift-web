@@ -3,7 +3,7 @@ import FormError from '@/components/forms/form-error';
 import FormInput from '@/components/forms/form-input';
 import useSigninMutation, {
   SigninUserInput,
-} from '@/hooks/api/mutations/auth/use-signin-mutation';
+} from '@/hooks/api/mutations/use-signin-mutation';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';

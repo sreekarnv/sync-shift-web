@@ -3,4 +3,6 @@ export interface User {
   role: string;
   email: string;
   name: string;
+  defaultStartAvailableTime?: string;
+  defaultEndAvailableTime?: string;
 }
