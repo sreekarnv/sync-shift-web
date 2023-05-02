@@ -5,4 +5,5 @@ export interface User {
   name: string;
   defaultStartAvailableTime?: string;
   defaultEndAvailableTime?: string;
+  isWithdrawn?: boolean;
 }

@@ -1,7 +1,6 @@
 import { axios } from '@/config/axios';
 import useAppContext from '@/hooks/use-app-context';
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
 
 export type DefaultAvailableInput = {
   startTimeStamp: string;

@@ -6,7 +6,7 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import { useForm } from 'react-hook-form';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import FormInput from '@/components/forms/form-input';
 import Button from '@/components/ui/button';
 import FormError from '@/components/forms/form-error';
@@ -103,6 +103,19 @@ const MembersDetailPage: React.FC = () => {
 
   if (isLoading || isFLoading || !data || !fData || isMLoading || !mData)
     return <></>;
+
+  if (data?.isWithdrawn) {
+    return (
+      <div className="row">
+        <div className="col-md-12 text-center">
+          <h2 className="mt-3 mb-4">Member has withdrawn</h2>
+          <Link to="/members">
+            <Button>Go Back to Members</Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

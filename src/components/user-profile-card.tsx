@@ -1,16 +1,21 @@
 import React from 'react';
 import '@/assets/css/components/user-profile.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import FeatherEditIcon from './icons/feather-edit.icon';
 import Avatar from 'boring-avatars';
 import FeatherCoffeeIcon from './icons/feather-coffee.icon';
 import FeatherMailIcon from './icons/feather-mail.icon';
 import { User } from '@/types/User';
+import Button from './ui/button';
+import useUserWithdrawMutation from '@/hooks/api/mutations/use-user-withdraw-mutation';
 
 const UserProfileCard: React.FC<{ user: User; showEdit?: boolean }> = ({
   user,
   showEdit = true,
 }) => {
+  const { pathname } = useLocation();
+  const { mutate } = useUserWithdrawMutation();
+
   return (
     <>
       <div className="user-profile">
@@ -53,6 +58,19 @@ const UserProfileCard: React.FC<{ user: User; showEdit?: boolean }> = ({
                     <p className="text-danger"> Not Available</p>
                   )}
                 </li>
+                {pathname.startsWith('/profile') && (
+                  <li className="mt-3">
+                    <Button
+                      onClick={() => {
+                        mutate({});
+                      }}
+                      style={{ width: '100%' }}
+                      color="danger"
+                    >
+                      Deactivate Me
+                    </Button>
+                  </li>
+                )}
               </ul>
             </div>
           </div>

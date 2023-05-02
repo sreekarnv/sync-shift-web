@@ -49,11 +49,20 @@ const columns = [
 const MembersPage: React.FC<MembersPageProps> = ({}) => {
   const { isLoading, data } = useMembersQuery();
 
-  if (isLoading || !data) return <Loader />;
+  if (isLoading || !data?.length) return <Loader />;
+
+  const updatedData =
+    data
+      ?.map((user) => {
+        if (!user.isWithdrawn) {
+          return user;
+        }
+      })
+      .filter((l) => l) ?? [];
 
   return (
     <>
-      <MembersDataTable data={data} columns={columns} />
+      <MembersDataTable data={updatedData} columns={columns} />
     </>
   );
 };
