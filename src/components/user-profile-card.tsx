@@ -46,6 +46,13 @@ const UserProfileCard: React.FC<{ user: User; showEdit?: boolean }> = ({
                     {user.email}
                   </a>
                 </li>
+                <li className="contacts-block__item text-center">
+                  {user.defaultStartAvailableTime ? (
+                    <p className="text-success">Is Available</p>
+                  ) : (
+                    <p className="text-danger"> Not Available</p>
+                  )}
+                </li>
               </ul>
             </div>
           </div>
