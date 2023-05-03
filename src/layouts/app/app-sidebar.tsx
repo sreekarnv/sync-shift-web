@@ -25,7 +25,7 @@ const AppSidebar: React.FC<AppSidebarProps> = ({}) => {
               <div className="nav-item theme-text">
                 <Link to="/" className="nav-link">
                   {' '}
-                  BITS TCS{' '}
+                  Sync Shift{' '}
                 </Link>
               </div>
             </div>
