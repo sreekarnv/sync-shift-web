@@ -1,5 +1,5 @@
 # Sync Shift (Web)
-This is a project made with React and Typescript for the BITS Pilani Course - Object Oriented Programming. The project is a web application for scheduling slots for BITS Pilani students, staff and booking facilities. Backend is made with Java and Spring Boot and can be found [here]()
+This is a project made with React and Typescript for the BITS Pilani Course - Object Oriented Programming. The project is a web application for scheduling slots for BITS Pilani students, staff and booking facilities. Backend is made with Java and Spring Boot and can be found [here](https://github.com/sreekarnv/sync-shift-api)
 
 <br />
 
@@ -8,6 +8,7 @@ This is a project made with React and Typescript for the BITS Pilani Course - Ob
 Make sure you have [node.js](https://nodejs.org) and [yarn](https://yarnpkg.com/) installed on your system. Then run the following commands in the root directory of the project.
 
 ```bash
+git clone https://github.com/sreekarnv/sync-shift-web.git
 yarn install
 yarn dev
 ```
