@@ -1,8 +1,10 @@
+import clsx from 'clsx';
 import React from 'react';
 
-interface FeatherCalendarIconProps extends React.PropsWithChildren {}
-
-const FeatherEditIcon: React.FC<FeatherCalendarIconProps> = (props) => {
+const FeatherEditIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({
+  className,
+  ...props
+}) => {
   return (
     <>
       <svg
@@ -15,7 +17,7 @@ const FeatherEditIcon: React.FC<FeatherCalendarIconProps> = (props) => {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="feather feather-edit-3"
+        className={clsx(['feather feather-edit-3', className])}
         {...props}
       >
         <path d="M12 20h9"></path>

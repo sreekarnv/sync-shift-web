@@ -1,8 +1,8 @@
 import useAppContext from '@/hooks/use-app-context';
-import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
 import AppNavbar from '@/layouts/app/app-navbar';
 import AppSidebar from '@/layouts/app/app-sidebar';
+import React from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 
 const AppLayout: React.FC = () => {
   const { user } = useAppContext();

@@ -1,6 +1,10 @@
+import clsx from 'clsx';
 import React from 'react';
 
-const FeatherMailIcon: React.FC = () => {
+const FeatherMailIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({
+  className,
+  ...props
+}) => {
   return (
     <>
       <svg
@@ -13,7 +17,8 @@ const FeatherMailIcon: React.FC = () => {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="feather feather-mail"
+        className={clsx(['feather feather-mail', className])}
+        {...props}
       >
         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
         <polyline points="22,6 12,13 2,6"></polyline>

@@ -1,6 +1,6 @@
+import Alert from '@/components/ui/alert';
 import { AxiosError } from 'axios';
 import React from 'react';
-import Alert from '../ui/alert';
 
 interface FormErrorProps {
   error: AxiosError<any>;

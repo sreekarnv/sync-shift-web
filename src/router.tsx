@@ -9,13 +9,15 @@ import MembersPage from '@/pages/app/members/members-index.page';
 import ProfilePage from '@/pages/app/profile/profile-index.page';
 import MembersDetailPage from '@/pages/app/members/members-detail-page';
 import ProfileEditPage from '@/pages/app/profile/profile-edit-page';
-import FacilitiesPage from './pages/app/facilities/facilities-index.page';
-import FacilitiesDetailPage from './pages/app/facilities/facilities-detail.page';
-import SetAvailabilityLayout from './layouts/availability.layout';
-import SetAvailabilityIndexPage from './pages/availability-form/set-availability-index.page';
+import FacilitiesPage from '@/pages/app/facilities/facilities-index.page';
+import FacilitiesDetailPage from '@/pages/app/facilities/facilities-detail.page';
+import SetAvailabilityIndexPage from '@/pages/availability-form/set-availability-index.page';
 
-const AuthLayout = React.lazy(() => import('./layouts/auth.layout'));
-const AppLayout = React.lazy(() => import('./layouts/app.layout'));
+const AuthLayout = React.lazy(() => import('@/layouts/auth.layout'));
+const AppLayout = React.lazy(() => import('@/layouts/app.layout'));
+const SetAvailabilityLayout = React.lazy(
+  () => import('@/layouts/availability.layout')
+);
 
 const router = createBrowserRouter([
   {

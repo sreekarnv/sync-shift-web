@@ -1,6 +1,5 @@
 import { axios } from '@/config/axios';
 import useAppContext from '@/hooks/use-app-context';
-import { FacilitySlot } from '@/types/FacilitySlot';
 import { MemberSlot } from '@/types/MemberSlot';
 import { useQuery } from '@tanstack/react-query';
 import { AxiosError } from 'axios';

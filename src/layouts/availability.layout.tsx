@@ -1,8 +1,7 @@
-import React from 'react';
-import AppNavbar from './app/app-navbar';
-import { Outlet } from 'react-router-dom';
 import UserProfileCard from '@/components/user-profile-card';
 import useAppContext from '@/hooks/use-app-context';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 const SetAvailabilityLayout: React.FC = () => {
   const { user } = useAppContext();

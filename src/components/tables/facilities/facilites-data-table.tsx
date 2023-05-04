@@ -1,5 +1,5 @@
-import React from 'react';
 import '@/assets/css/components/data-table.css';
+import React from 'react';
 
 import {
   ColumnFiltersState,
@@ -14,9 +14,9 @@ import {
 
 import { rankItem } from '@tanstack/match-sorter-utils';
 
-import clsx from 'clsx';
 import FormInput from '@/components/forms/form-input';
 import { FormSelect } from '@/components/forms/form-select';
+import clsx from 'clsx';
 
 interface FacilitesDataTableProps {
   data: any[];

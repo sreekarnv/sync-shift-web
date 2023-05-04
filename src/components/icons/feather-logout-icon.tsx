@@ -1,9 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
-interface FeatherLogoutIconProps extends React.SVGProps<SVGSVGElement> {}
-
-const FeatherLogoutIcon: React.FC<FeatherLogoutIconProps> = ({
+const FeatherLogoutIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({
   className,
   ...props
 }) => {

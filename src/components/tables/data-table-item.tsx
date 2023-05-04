@@ -1,8 +1,8 @@
+import Button from '@/components/ui/button';
+import Avatar from 'boring-avatars';
+import clsx from 'clsx';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from '@/components/ui/button';
-import clsx from 'clsx';
-import Avatar from 'boring-avatars';
 
 export const Profile: React.FC<{ image?: string; name: string }> = ({
   name,

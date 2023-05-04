@@ -1,9 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 
-interface FeatherUserIconProps extends React.SVGProps<SVGSVGElement> {}
-
-const FeatherUserIcon: React.FC<FeatherUserIconProps> = ({
+const FeatherUserIcon: React.FC<React.SVGProps<SVGSVGElement>> = ({
   className,
   ...props
 }) => {

@@ -3,10 +3,10 @@ import FeatherLogoutIcon from '@/components/icons/feather-logout-icon';
 import FeatherUserIcon from '@/components/icons/feather-user-icon';
 import FeatherUsersIcon from '@/components/icons/feather-users-icon';
 import useAppContext from '@/hooks/use-app-context';
+import AppSidebarMenuHeading from '@/layouts/app/app-sidebar-menu-heading';
+import AppSidebarMenuItem from '@/layouts/app/app-sidebar-menu-item';
 import Avatar from 'boring-avatars';
 import React from 'react';
-import AppSidebarMenuHeading from './app-sidebar-menu-heading';
-import AppSidebarMenuItem from './app-sidebar-menu-item';
 import { Link } from 'react-router-dom';
 
 interface AppSidebarProps extends React.PropsWithChildren {}

@@ -1,11 +1,11 @@
+import FeatherEditIcon from '@/components/icons/feather-edit.icon';
 import FeatherLogoutIcon from '@/components/icons/feather-logout-icon';
 import FeatherUserIcon from '@/components/icons/feather-user-icon';
 import useAppContext from '@/hooks/use-app-context';
 import useAppPage from '@/hooks/use-page';
+import AppNavbarDropdownLink from '@/layouts/app/app-navbar-dropdown-link';
 import Avatar from 'boring-avatars';
 import React from 'react';
-import AppNavbarDropdownLink from './app-navbar-dropdown-link';
-import FeatherEditIcon from '@/components/icons/feather-edit.icon';
 
 interface AppNavbarProps extends React.PropsWithChildren {}
 

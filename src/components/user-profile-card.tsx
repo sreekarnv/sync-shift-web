@@ -1,13 +1,13 @@
-import React from 'react';
 import '@/assets/css/components/user-profile.css';
-import { Link, useLocation } from 'react-router-dom';
-import FeatherEditIcon from './icons/feather-edit.icon';
-import Avatar from 'boring-avatars';
-import FeatherCoffeeIcon from './icons/feather-coffee.icon';
-import FeatherMailIcon from './icons/feather-mail.icon';
-import { User } from '@/types/User';
-import Button from './ui/button';
+import FeatherCoffeeIcon from '@/components/icons/feather-coffee.icon';
+import FeatherEditIcon from '@/components/icons/feather-edit.icon';
+import FeatherMailIcon from '@/components/icons/feather-mail.icon';
+import Button from '@/components/ui/button';
 import useUserWithdrawMutation from '@/hooks/api/mutations/use-user-withdraw-mutation';
+import { User } from '@/types/User';
+import Avatar from 'boring-avatars';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const UserProfileCard: React.FC<{ user: User; showEdit?: boolean }> = ({
   user,

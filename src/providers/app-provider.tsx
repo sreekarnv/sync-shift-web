@@ -42,7 +42,7 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
     const jwt = localStorage.getItem('jwt-auth-token');
     setToken(jwt || undefined);
 
-    if (jwt) {
+    if (jwt && checkJWTValidity(jwt)) {
       const payload = parseJwt(jwt);
 
       if (payload.user) {
@@ -66,6 +66,20 @@ const AppProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
         setUser(payload.user);
       }
     }
+  };
+
+  const checkJWTValidity = (t: string) => {
+    if (t) {
+      const payload = parseJwt(t);
+
+      if (payload.exp < Date.now() / 1000) {
+        clearJwtFromStorage();
+      }
+
+      return true;
+    }
+
+    return false;
   };
 
   const clearJwtFromStorage = () => {
